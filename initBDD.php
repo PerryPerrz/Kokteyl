@@ -57,9 +57,9 @@ $sql = "CREATE DATABASE IF NOT EXISTS $db;
           CONSTRAINT FK_PanierRecette FOREIGN KEY (nomRecette) REFERENCES Recettes(nom)
         )";
 
-try{
+try {
     $bdd = new PDO('mysql:host=localhost;charset=utf8', 'root', '');
-}catch (Exception $e) {
+} catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
 
@@ -110,11 +110,11 @@ $stmt->bindParam(':nomRec', $nomRec);
 
 //Si la liste 'Recettes' contient bien des valeurs on la parcourt et on exécute la requête préparée auparavant sur ces valeurs.
 if (!empty($Recettes)) {
-    foreach ($Recettes as $titre){
+    foreach ($Recettes as $titre) {
         $nomRec = array_values($titre)[0];
-        foreach ($titre as $key => $value ){
-            if(is_array($value)) {
-                foreach ($value as $ing){
+        foreach ($titre as $key => $value) {
+            if (is_array($value)) {
+                foreach ($value as $ing) {
                     $nomIng = $ing;
                     $stmt->execute();
                 }
@@ -130,9 +130,9 @@ $stmt->bindParam(':nomSuper', $nomSuper);
 
 //Si la liste 'Hierarchie' contient bien des valeurs on la parcourt et on exécute la requête préparée auparavant sur ces valeurs.
 if (!empty($Hierarchie)) {
-    foreach ($Hierarchie as $aliment => $tab){
-        if(array_key_exists('super-categorie', $tab)){
-            foreach ($tab['super-categorie'] as $super){
+    foreach ($Hierarchie as $aliment => $tab) {
+        if (array_key_exists('super-categorie', $tab)) {
+            foreach ($tab['super-categorie'] as $super) {
                 $nom = $aliment;
                 $nomSuper = $super;
                 $stmt->execute();
