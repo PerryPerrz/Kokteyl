@@ -1,3 +1,9 @@
+<?php
+//On ouvre la bdd.
+include("../OuvertureBDD/index.php");
+//On crée une session ou récupère celle en cours (gestion des cookies de session).
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <title>Kokteyl</title>
@@ -28,9 +34,12 @@
      style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">Close Menu</a>
     <a href="#drink" onclick="w3_close()" class="w3-bar-item w3-button">Drinks</a>
-    <a onclick="location.href='Inscription/';" class="w3-bar-item w3-button">Inscription</a>
-    <a onclick="location.href='Connexion/';" class="w3-bar-item w3-button">Connexion</a>
-    <a onclick="location.href='Deconnexion/';" class="w3-bar-item w3-button">Deconnexion</a>
+    <?php if (isset($_SESSION['login'])){ ?>
+        <a onclick="location.href='Deconnexion/'" class="w3-bar-item w3-button">Deconnexion</a>
+    <?php } else {?>
+        <a onclick="location.href='Inscription/'" class="w3-bar-item w3-button">Inscription</a>
+        <a onclick="location.href='Connexion/'" class="w3-bar-item w3-button">Connexion</a>
+    <?php }?>
     <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
 </nav>
 

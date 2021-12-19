@@ -7,9 +7,13 @@
      style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">Close Menu</a>
     <a onclick="location.href='../'" class="w3-bar-item w3-button">Accueil</a>
-    <a onclick="location.href='../Inscription/'" class="w3-bar-item w3-button">Inscription</a>
-    <a onclick="location.href='../Connexion/'" class="w3-bar-item w3-button">Connexion</a>
-    <a onclick="location.href='../Deconnexion/'" class="w3-bar-item w3-button">Deconnexion</a>
+    <?php if (isset($_SESSION['login'])){ ?>
+        <a onclick="location.href='../Deconnexion/'" class="w3-bar-item w3-button">Deconnexion</a>
+    <?php } else {?>
+        <a onclick="location.href='../Inscription/'" class="w3-bar-item w3-button">Inscription</a>
+        <a onclick="location.href='../Connexion/'" class="w3-bar-item w3-button">Connexion</a>
+    <?php }?>
+
 </nav>
 
 <!-- Top menu -->
