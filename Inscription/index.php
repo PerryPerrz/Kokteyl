@@ -17,7 +17,7 @@ include_once("../StructurePage/menu.php");
 			<h2>Inscription<br /></h2>
 			<p>Les champs comportant le symbole <em>*</em> sont <strong>obligatoire</strong>.</p>
 		</div>
-		<div class = "boxB">
+		<div class = "formulaire">
 			<form method="post" action="#">
 			  <fieldset>
 			    <legend>Information du compte</legend>

@@ -295,6 +295,15 @@ h6 {
     object-fit: fill
 }
 
+.formulaire {
+    text-align: center;
+}
+
+.disable {
+    pointer-events: none;
+    cursor: default;
+}
+
 .w3-wide {
     letter-spacing: 4px
 }
