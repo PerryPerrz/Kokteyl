@@ -7,12 +7,14 @@
      style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">Close Menu</a>
     <a onclick="location.href='../'" class="w3-bar-item w3-button">Accueil</a>
-    <?php if (isset($_SESSION['login'])){ ?>
+    <a onclick="location.href='../AccesHierarchique/'" class="w3-bar-item w3-button">Accéder aux cocktails</a>
+    <?php if (isset($_SESSION['login'])) { ?>
+        <a onclick="location.href='../Compte/'" class="w3-bar-item w3-button">Mon Compte</a>
         <a onclick="location.href='../Deconnexion/'" class="w3-bar-item w3-button">Deconnexion</a>
-    <?php } else {?>
+    <?php } else { ?>
         <a onclick="location.href='../Inscription/'" class="w3-bar-item w3-button">Inscription</a>
         <a onclick="location.href='../Connexion/'" class="w3-bar-item w3-button">Connexion</a>
-    <?php }?>
+    <?php } ?>
 
 </nav>
 
@@ -20,8 +22,8 @@
 <div class="w3-top">
     <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
         <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
-        <div class="w3-right w3-padding-16">"Cart"</div>
-        <div class="w3-center w3-padding-16">Kokteyl</div>
+        <div class="w3-right w3-padding-16"><a id="caddie" href="../"><img src="../Ressources/caddie3.png"/></a></div>
+        <div class="w3-center w3-padding-16"><a id="logo" href="../"><img src="../Ressources/logoKok.png"/></a></div>
     </div>
 </div>
 
