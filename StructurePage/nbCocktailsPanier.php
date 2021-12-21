@@ -7,22 +7,22 @@ function nbCocktailsPanier(): string
     } else if (file_exists("OuvertureBDD/index.php")) {
         include("OuvertureBDD/index.php");
     }
+
     $res = "";
-    if (isset($_SESSION['login'])) {
-        $panier = $bdd->prepare("SELECT COUNT(nomRecette) FROM Panier WHERE utilisateur = :utilisateur");
+    if (isset($_SESSION['login'])) { //Si on est connecté
+        $panier = $bdd->prepare("SELECT nomRecette FROM Panier WHERE utilisateur = :utilisateur");
         $panier->bindParam(":utilisateur", $_SESSION['login']);
         $panier->execute();
 
-        if ($nbCocktails = $panier->fetch()) {
-            if ($nbCocktails <= 3 & $nbCocktails > 0) {
-                $res = "" . $nbCocktails;
-            } else if ($nbCocktails > 3) {
-                $res = "+";
-            }
+        $cocktails = $panier->fetchAll();
+        $nbCocktails = sizeof($cocktails);
+        if ($nbCocktails <= 3 & $nbCocktails > 0) {
+            $res = "" . $nbCocktails;
+        } else if ($nbCocktails > 3) {
+            $res = "+";
         }
-    }
-    else {
-        if (isset($_SESSION['panier'])) {
+    } else { //Si on est pas connecté
+        if (isset($_SESSION['panier'])) { //Si il existe un cookie relatif au panier
             $nbCocktails = 0;
             //On parcourt les recettes enregistrées dans le panier dans les cookies
             foreach ($_SESSION['panier'] as $cocktail => $valeur) { //On parcourt les cookies de panier et on se retrouve avec chaque cocktail et sa valeur (true si dans le panier, false si supprimé).
@@ -39,6 +39,5 @@ function nbCocktailsPanier(): string
             }
         }
     }
-    echo $res;
     return $res;
 }

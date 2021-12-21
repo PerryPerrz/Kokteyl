@@ -18,7 +18,8 @@ include_once("../AccesHierarchique/fonctionsPanier.php");
         $panier->bindParam(":utilisateur", $_SESSION['login']);
         $panier->execute();
         while ($cocktail = $panier->fetch()) {
-            echo "<li>" . $cocktail['nomRecette'] . "<img class=\"croix\" src=\"../Ressources/caddie.png\" alt=\"Croix retirant le cocktail du pannier\" onclick=\"suppRecette('" . $_SESSION['login'] . "','" . $cocktail['nomRecette'] . "')\"> </li>";
+            $nomCocktail = str_replace("'", "'", $cocktail['nomRecette']);
+            echo "<li>" . $cocktail['nomRecette'] . "<img class=\"croix\" src=\"../Ressources/caddie.png\" alt=\"Croix retirant le cocktail du pannier\" onclick=\"suppRecette('" . $_SESSION['login'] . "','" . $nomCocktail . "')\"> </li>";
         }
     } else {
         //Si l'utilisateur à déjà des cocktails dans le panier
@@ -27,7 +28,8 @@ include_once("../AccesHierarchique/fonctionsPanier.php");
             foreach ($_SESSION['panier'] as $cocktail => $valeur) { //On parcourt les cookies de panier et on se retrouve avec chaque cocktail et sa valeur (true si dans le panier, false si supprimé).
                 //Si le cocktail n'a pas été enlevé du panier par l'utilisateur on l'affiche
                 if ($valeur) {
-                    echo "<li>" . $cocktail . "<img class=\"croix\" src=\"../Ressources/caddie.png\" alt=\"Croix retirant le cocktail du pannier\" onclick=\"suppCookie('" . $cocktail . "')\"> </li>";
+                    $nomCocktail = str_replace("'", "'", $cocktail);
+                    echo "<li>" . $cocktail . "<img class=\"croix\" src=\"../Ressources/caddie.png\" alt=\"Croix retirant le cocktail du pannier\" onclick=\"suppCookie('" . $nomCocktail . "')\"> </li>";
                 }
             }
         } else {
