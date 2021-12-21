@@ -51,6 +51,8 @@ include_once("../StructurePage/menu.php");
                             if ($donnees = $verifMdp->fetch()) {
                                 /*Le mot de passe correspond*/
                                 $_SESSION['login'] = $mailVerification;
+                                include_once "../StructurePage/recupDonneesPanier.php";
+
                                 header("Location: ../");
                             } else {
                                 /*Le mot de passe ne correspond pas au mail*/

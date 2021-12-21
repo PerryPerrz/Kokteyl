@@ -84,7 +84,10 @@ include_once("../StructurePage/menu.php");
                                     $stmt->bindParam(':ville', $ville);
                                     $stmt->bindParam(':noTelephone', $telephone);
                                     $stmt->execute();
+
                                     $_SESSION['login'] = $email;
+                                    include_once "../StructurePage/recupDonneesPanier.php";
+
                                     if (isset($_SESSION['login'])) {
                                         header("Location: ../");
                                     }

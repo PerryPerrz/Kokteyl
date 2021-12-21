@@ -1,6 +1,7 @@
 <?php
 //On ouvre la bdd.
-include("OuvertureBDD/index.php");
+include_once ("OuvertureBDD/index.php");
+include_once ("StructurePage/nbCocktailsPanier.php");
 //On crée une session ou récupère celle en cours (gestion des cookies de session).
 session_start();
 ?>
@@ -49,7 +50,7 @@ session_start();
 <div class="w3-top">
     <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
         <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
-        <div class="w3-right w3-padding-16"><a id="caddie" href="Panier/"><img src="Ressources/caddie.png"/></a></div>
+        <div class="w3-right w3-padding-16"><a id="caddie" href="Panier/"><img src="Ressources/caddie<?=nbCocktailsPanier()?>.png"/></a></div>
         <div class="w3-center w3-padding-16"><a id="logo" href="#"><img src="Ressources/logoKok.png"/></a></div>
     </div>
 </div>
