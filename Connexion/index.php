@@ -8,13 +8,12 @@ include_once("../StructurePage/entete.php");
 include_once("../StructurePage/menu.php");
 ?>
 
-<div id="wrapper">
+<div class="w3-main w3-content w3-padding w3-center" style="max-width:1200px;margin-top:100px">
     <div class="title">
-        <h2>Connexion au compte<br/></h2>
+        <h2>Connexion au compte<br /></h2>
     </div>
     <div id="page" class="container">
         <div class="boxA">
-            <h2>Connexion<br/></h2>
             <p>Les champs comportant le symbole <em>*</em> sont <strong>obligatoire</strong>.</p>
         </div>
         <div class="boxB">
@@ -22,8 +21,7 @@ include_once("../StructurePage/menu.php");
                 <fieldset>
                     <legend>Information du compte</legend>
                     <label for="email">Email <em>*</em></label>
-                    <input name="email" type="email" placeholder="Email" required=""
-                           pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"><br>
+                    <input name="email" type="email" placeholder="Email" required="" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"><br>
                     <label for="mdp">Mot de passe <em>*</em></label>
                     <input type="password" name="mdp" required=""><br>
                     <?php

@@ -117,6 +117,26 @@
         };
         xmlhttp.open("GET", "../AccesHierarchique/backLead.php?p=" + categorie, true);
         xmlhttp.send();
+    }
 
+    function viderPanier() {
+
+        if (window.XMLHttpRequest) {
+            // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code pour les navigateurs IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                document.location.href = "./";
+            } else {
+                xmlhttp.send();
+            }
+        };
+        xmlhttp.open("GET", "../AccesHierarchique/viderPanier.php", true);
+        xmlhttp.send();
     }
 </script>

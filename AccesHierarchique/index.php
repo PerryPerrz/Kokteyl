@@ -9,46 +9,11 @@ include_once("../StructurePage/menu.php");
 include_once("../AccesHierarchique/fonctionsPanier.php");
 ?>
 
-<div id="header-wrapper">
-    <?php
-    //On affiche le bouton déconnexion si l'utilisateur est connecté
-    if (isset($_SESSION['login'])) {
-    ?>
-        <button onclick="location.href='../Deconnexion/'" class="button" style=vertical-align:middle>Déconnexion
-        </button>
-    <?php
-    } //On affiche le bouton connexion si l'utilisateur n'est pas connecté
-    else {
-    ?>
-        <button onclick="window.location.href = '../ConnexionSite/';" class="button" style=vertical-align:middle>
-            Connexion
-        </button>
-    <?php } ?>
-
-    <!--Bandeau de navigation-->
-    <div id="header" class="container">
-        <div id="logo">
-            <h1><a href="../">Kakuteru</a></h1>
-        </div>
-        <div id="menu">
-            <ul>
-                <li class="active"><a href="../" accesskey="1" title="">Accueil</a></li>
-                <li><a href="#" accesskey="2" title="">Nos cocktails</a></li>
-                <li><a href="../Recettes/" accesskey="3" title="">Nos recettes</a></li>
-                <!--On affiche l'onglet mon compte si l'utilisateur est connecté-->
-                <?php if (isset($_SESSION['login'])) { ?>
-                    <li><a href="../Compte/" accesskey="4" title="">Mon compte</a></li>
-                <?php } ?>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<div id="wrapper">
+<div class="w3-main w3-content w3-padding w3-center" style="max-width:1200px;margin-top:100px">
     <div id="staff" class="container">
         <div class="title">
-            <h2>Nos cocktails</h2>
-            <span> Voici la liste de nos différents cocktails (disponible dès à présent sur le KakuteruStore)</span>
+            <h2>Nos propositions de cocktails</h2>
+            <span>Cliquez sur un filtre pour afficher les boissons utilisant cet ingrédient, cliquez à nouveau desssus pour l'enlever.</span>
         </div>
 
         <?php
@@ -113,7 +78,7 @@ include_once("../AccesHierarchique/fonctionsPanier.php");
 
         ?>
 
-        <h2>Choisissez un filtre pour vos boisson</h2><br>
+        <h2>Voici nos filtres</h2><br>
         <div>
             <?php
             //On affiche toutes les catégories possibles de sélectionner
