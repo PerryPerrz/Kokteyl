@@ -242,17 +242,7 @@ include_once("../StructurePage/menu.php");
                 <br>
                 <p><input name="suppression" type="submit" value="Supprimer le compte"></p>
             </form>
-            <h3>Mes recettes favorites</h3>
-            <ul>
-                <?php
-                $panier = $bdd->prepare("SELECT nomRecette FROM Panier WHERE utilisateur = :utilisateur");
-                $panier->bindParam(":utilisateur", $_SESSION['login']);
-                $panier->execute();
-                while ($recette = $panier->fetch()) {
-                    echo "<li>" . $recette['nomRecette'] . "</li>";
-                }
-                ?>
-            </ul>
+
         </div>
     </div>
 </div>
