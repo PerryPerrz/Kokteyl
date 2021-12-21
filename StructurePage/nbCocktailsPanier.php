@@ -39,5 +39,6 @@ function nbCocktailsPanier(): string
             }
         }
     }
+    echo $res;
     return $res;
 }

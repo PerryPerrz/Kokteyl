@@ -6,130 +6,9 @@ session_start();
 //On fait apparaître la structure du haut de la page
 include_once("../StructurePage/entete.php");
 include_once("../StructurePage/menu.php");
+include_once("../AccesHierarchique/fonctionsPanier.php");
 ?>
 
-<script>
-    //Fonction permettant d'ajouter une recette au panier quand l'utilisateur est connecté
-    function ajoutRecette(user, recette) {
-        if (window.XMLHttpRequest) {
-            // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code pour les navigateurs IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        var str = user + "|" + recette;
-        xmlhttp.onreadystatechange = function() {
-            if (!this.readyState == 4) { //Si l'appel n'est pas terminé
-                xmlhttp.send();
-            }
-        };
-        xmlhttp.open("GET", "addCocktail.php?p=" + str, true);
-        xmlhttp.send();
-    }
-
-    //Fonction permettant de supprimer une recette du panier quand l'utilisateur est connecté
-    function suppRecette(user, recette) {
-        if (window.XMLHttpRequest) {
-            // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code pour les navigateurs IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        var str = user + "|" + recette;
-        xmlhttp.onreadystatechange = function() {
-            if (!this.readyState == 4) { //Si l'appel n'est pas terminé
-                xmlhttp.send();
-            }
-        };
-        xmlhttp.open("GET", "suppCocktail.php?p=" + str, false);
-        xmlhttp.send();
-    }
-
-    //Fonction permettant d'ajouter une recette au panier quand l'utilisateur n'est pas connecté
-    function addCookie(recette) {
-        if (window.XMLHttpRequest) {
-            // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code pour les navigateurs IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        xmlhttp.onreadystatechange = function() {
-            if (!this.readyState == 4) { //Si l'appel n'est pas terminé
-                xmlhttp.send();
-            }
-        };
-        xmlhttp.open("GET", "addCookie.php?p=" + recette, true);
-        xmlhttp.send();
-    }
-
-
-    //Fonction permettant de supprimer une recette du panier quand l'utilisateur n'est pas connecté
-    function suppCookie(recette) {
-        if (window.XMLHttpRequest) {
-            // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code pour les navigateurs IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        xmlhttp.onreadystatechange = function() {
-            if (!this.readyState == 4) { //Si l'appel n'est pas terminé
-                xmlhttp.send();
-            }
-        };
-        xmlhttp.open("GET", "suppCookie.php?p=" + recette, true);
-        xmlhttp.send();
-    }
-
-    //Fonction qui change la catégorie courante par celle donnée en paramètre et enregistre le chemin parcourue jusque celle ci dans $_SESSION
-    function sousCat(superCat) {
-
-        if (window.XMLHttpRequest) {
-            // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code pour les navigateurs IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-                document.location.href = "./";
-            } else {
-                xmlhttp.send();
-            }
-        };
-        xmlhttp.open("GET", "sousCat.php?p=" + superCat, true);
-        xmlhttp.send();
-    }
-
-    function backLead(categorie) {
-
-        if (window.XMLHttpRequest) {
-            // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code pour les navigateurs IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-                document.location.href = "./";
-            } else {
-                xmlhttp.send();
-            }
-        };
-        xmlhttp.open("GET", "backLead.php?p=" + categorie, true);
-        xmlhttp.send();
-
-    }
-</script>
 <div id="header-wrapper">
     <?php
     //On affiche le bouton déconnexion si l'utilisateur est connecté
@@ -338,58 +217,57 @@ include_once("../StructurePage/menu.php");
                         <div class="w3-quarter">
                             <div class="img">
                                 <?php
-                                    $nomCocktail = $cocktails[$i]['nom'];
-                                    echo $nomCocktail;
+                                $nomCocktail = $cocktails[$i]['nom'];
 
-                                    //Si le cocktail à une image, on l'affiche sinon on affiche une image par défaut
-                                    if (file_exists($nomFinal)) {
-                                        echo "<img src=\"" . $nomFinal . "\" alt=\"" . $nomCocktail . "\" class = \"images\" onclick=\"";
-                                    } else {
-                                        echo "<img src=\"../Ressources/defaultboisson.png\" alt=\"Image à clicker pour ajouter l'article ". $nomCocktail ." au panier\" class = \"images\" onclick=\"";
-                                    }
+                                //Si le cocktail à une image, on l'affiche sinon on affiche une image par défaut
+                                if (file_exists($nomFinal)) {
+                                    echo "<img src=\"" . $nomFinal . "\" alt=\"" . $nomCocktail . "\" class = \"images\" onclick=\"";
+                                } else {
+                                    echo "<img src=\"../Ressources/defaultboisson.png\" alt=\"Image à clicker pour ajouter l'article " . $nomCocktail . " au panier\" class = \"images\" onclick=\"";
+                                }
 
-                                    //Si le cocktail contient le caractère spécial ' non échappé, on l'échappe
+                                //Si le cocktail contient le caractère spécial ' non échappé, on l'échappe
                                 //$nomCocktail = str_replace("'", "\'", $cocktails[$i]['nom']);
 
-                                    //On vérifie si la recette est dans le panier de l'utilisateur, si oui un click sur l'image l'enlève, si non, un click sur l'image l'ajoute.
-                                    //Si l'utilisateur est connecté
-                                    if (isset($_SESSION['login'])) {
+                                //On vérifie si la recette est dans le panier de l'utilisateur, si oui un click sur l'image l'enlève, si non, un click sur l'image l'ajoute.
+                                //Si l'utilisateur est connecté
+                                if (isset($_SESSION['login'])) {
 
-                                        $estDansPanier = false;
-                                        //On parcours le panier de l'utilisateur pour savoir si le cocktail est dedans
-                                        $panier = $bdd->prepare("SELECT nomRecette FROM Panier WHERE utilisateur = :utilisateur");
-                                        $panier->bindParam(":utilisateur", $_SESSION['login']);
-                                        $panier->execute();
-                                        while ($cocktail = $panier->fetch()) {
-                                            if ($cocktail['nomRecette'] == $nomCocktail)
-                                                $estDansPanier = true;
-                                        }
-
-                                        $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                                        //Si le cocktail est dans le panier on propose de le supprimer et inversement sinon
-                                        if ($estDansPanier) {
-                                            echo "suppRecette('". $_SESSION['login']."','". $nomCocktail ."')";
-                                        } else {
-                                            echo "ajoutRecette('". $_SESSION['login']."','". $nomCocktail ."')";
-                                        }
-                                    } else { //Si l'utilisateur n'est pas connecté
-                                        //Si l'utilisateur à déjà ajouté ou supprimé le cocktail au panier
-                                        if(isset($_SESSION['panier'][$nomCocktail])) {
-                                            //Si il est actuellement ajouté au panier on le supprime lors d'un click sur l'image
-                                            if ($_SESSION['panier'][$nomCocktail]) {
-                                                $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                                                echo "suppCookie('". $nomCocktail."')";
-                                            } else { //Si il n'est pas dans le panier on l'ajoute lors d'un click sur l'image
-                                                $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                                                echo "addCookie('". $nomCocktail."')";
-                                            }
-                                        } else { //Sinon, on ajoute le cocktail au panier lors d'un click sur l'image
-                                            $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                                            echo "addCookie('". $nomCocktail."')";
-                                        }
+                                    $estDansPanier = false;
+                                    //On parcours le panier de l'utilisateur pour savoir si le cocktail est dedans
+                                    $panier = $bdd->prepare("SELECT nomRecette FROM Panier WHERE utilisateur = :utilisateur");
+                                    $panier->bindParam(":utilisateur", $_SESSION['login']);
+                                    $panier->execute();
+                                    while ($cocktail = $panier->fetch()) {
+                                        if ($cocktail['nomRecette'] == $nomCocktail)
+                                            $estDansPanier = true;
                                     }
+
+                                    $nomCocktail = str_replace("'", "\'", $nomCocktail);
+                                    //Si le cocktail est dans le panier on propose de le supprimer et inversement sinon
+                                    if ($estDansPanier) {
+                                        echo "suppRecette('" . $_SESSION['login'] . "','" . $nomCocktail . "')";
+                                    } else {
+                                        echo "ajoutRecette('" . $_SESSION['login'] . "','" . $nomCocktail . "')";
+                                    }
+                                } else { //Si l'utilisateur n'est pas connecté
+                                    //Si l'utilisateur à déjà ajouté ou supprimé le cocktail au panier
+                                    if (isset($_SESSION['panier'][$nomCocktail])) {
+                                        //Si il est actuellement ajouté au panier on le supprime lors d'un click sur l'image
+                                        if ($_SESSION['panier'][$nomCocktail]) {
+                                            $nomCocktail = str_replace("'", "\'", $nomCocktail);
+                                            echo "suppCookie('" . $nomCocktail . "')";
+                                        } else { //Si il n'est pas dans le panier on l'ajoute lors d'un click sur l'image
+                                            $nomCocktail = str_replace("'", "\'", $nomCocktail);
+                                            echo "addCookie('" . $nomCocktail . "')";
+                                        }
+                                    } else { //Sinon, on ajoute le cocktail au panier lors d'un click sur l'image
+                                        $nomCocktail = str_replace("'", "\'", $nomCocktail);
+                                        echo "addCookie('" . $nomCocktail . "')";
+                                    }
+                                }
                                 ?>
-                                        ">
+                                ">
                             </div>
                             <h3> <?= $cocktails[$i]['nom'] ?></h3>
                             <p>Ingrédients
@@ -419,7 +297,7 @@ include_once("../StructurePage/menu.php");
                                 if (file_exists($nomFinal)) {
                                     echo "<img src=\"" . $nomFinal . "\" alt=\"" . $cocktails[$i]['nom'] . "\" class = \"images\" onclick=\"";
                                 } else {
-                                    echo "<img src=\"../Ressources/defaultboisson.png\" alt=\"Image à clicker pour ajouter l'article ". $cocktails[$i]['nom'] ." au panier\" class = \"images\" onclick=\"";
+                                    echo "<img src=\"../Ressources/defaultboisson.png\" alt=\"Image à clicker pour ajouter l'article " . $cocktails[$i]['nom'] . " au panier\" class = \"images\" onclick=\"";
                                 }
 
                                 //On vérifie si la recette est dans le panier de l'utilisateur, si oui un click sur l'image l'enlève, si non, un click sur l'image l'ajoute.
@@ -436,25 +314,25 @@ include_once("../StructurePage/menu.php");
                                     }
                                     //Si le cocktail est dans le panier on propose de le supprimer et inversement sinon
                                     if ($estDansPanier) {
-                                        echo "suppRecette('". $_SESSION['login']."','". $cocktails[$i]['nom']."')";
+                                        echo "suppRecette('" . $_SESSION['login'] . "','" . $cocktails[$i]['nom'] . "')";
                                     } else {
-                                        echo "ajoutRecette('". $_SESSION['login']."','". $cocktails[$i]['nom']."')";
+                                        echo "ajoutRecette('" . $_SESSION['login'] . "','" . $cocktails[$i]['nom'] . "')";
                                     }
                                 } else { //Si l'utilisateur n'est pas connecté
                                     //Si l'utilisateur à déjà ajouté ou supprimé le cocktail au panier
-                                    if(isset($_SESSION['panier'][$cocktails[$i]['nom']])) {
+                                    if (isset($_SESSION['panier'][$cocktails[$i]['nom']])) {
                                         //Si il est actuellement ajouté au panier on le supprime lors d'un click sur l'image
                                         if ($_SESSION['panier'][$cocktails[$i]['nom']] == true) {
-                                            echo "suppCookie('". $cocktails[$i]['nom']."')";
+                                            echo "suppCookie('" . $cocktails[$i]['nom'] . "')";
                                         } else { //Si il n'est pas dans le panier on l'ajoute lors d'un click sur l'image
-                                            echo "addCookie('". $cocktails[$i]['nom']."')";
+                                            echo "addCookie('" . $cocktails[$i]['nom'] . "')";
                                         }
                                     } else { //Sinon, on ajoute le cocktail au panier lors d'un click sur l'image
-                                        echo "addCookie('". $cocktails[$i]['nom']."')";
+                                        echo "addCookie('" . $cocktails[$i]['nom'] . "')";
                                     }
                                 }
                                 ?>
-                                        ">
+                                ">
                             </div>
                             <h3> <?= $cocktails[$i]['nom'] ?></h3>
                             <p>Ingrédients
