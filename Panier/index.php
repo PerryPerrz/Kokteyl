@@ -8,10 +8,10 @@ include_once("../StructurePage/entete.php");
 include_once("../StructurePage/menu.php");
 include_once("../AccesHierarchique/fonctionsPanier.php");
 ?>
+<link rel="stylesheet" href="../animBoutons.css">
 <div class="w3-main w3-content w3-padding w3-center" style="max-width:1200px;margin-top:100px">
     <h2>Mon panier</h2>
-    <button class='w3-button' onclick="viderPanier()">Vider panier</button>
-
+    <button class='glow-on-hover' onclick="viderPanier()">Vider panier</button>
     <ul class="w3-ul">
         <?php
         //On regarde si l'utilisateur est connecté, si il ne l'est pas, on regarde dans les cookies si il à sauvegardé une recette, sinon on regarde dans la bdd.

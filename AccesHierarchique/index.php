@@ -29,7 +29,7 @@ include_once("../AccesHierarchique/fonctionsPanier.php");
             }
         }
 
-        function sousCategorie($categorie)
+        function sousCategorie($categorie): string
         {
             if (!str_contains($categorie, "\'")) {
                 $nomBis = str_replace("'", "\'", $categorie);
@@ -47,7 +47,7 @@ include_once("../AccesHierarchique/fonctionsPanier.php");
         }
 
         //Fonction qui remplace les accents, les espaces et les apostrophes d'un string utilse pour charger les images à partir du nom des cocktails.
-        function formatageString($str)
+        function formatageString($str): string
         {
             $strSansAcc = $str; //Lettre sans accent
             $strSansAcc = preg_replace('#Ç#', 'C', $strSansAcc);
@@ -180,7 +180,7 @@ include_once("../AccesHierarchique/fonctionsPanier.php");
                             $nomFinal = $cheminImage . $nomImage . ".jpg";
                 ?>
                         <div class="w3-quarter">
-                            <div class="img">
+                            <div class="img w3-hover-opacity">
                                 <?php
                                 $nomCocktail = $cocktails[$i]['nom'];
 
@@ -256,7 +256,7 @@ include_once("../AccesHierarchique/fonctionsPanier.php");
                             $nomFinal = $cheminImage . $nomImage . ".jpg";
                 ?>
                         <div class="w3-quarter">
-                            <div class="img">
+                            <div class="img w3-hover-opacity">
                                 <?php
                                 //Si le cocktail à une image, on l'affiche sinon on affiche une image par défaut
                                 if (file_exists($nomFinal)) {
