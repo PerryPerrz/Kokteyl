@@ -11,9 +11,7 @@ function afficherCocktails(bool|array $cocktails, int $i, string $cheminImage): 
             <div class="img">
                 <img src="<?= $nomFinal ?>" alt="<?= $cocktails[$i]['nom'] ?>" class="images">
             </div>
-            <h3> <?= $cocktails[$i]['nom'] ?></h3>
-            <!--<p>Ingrédients : <?= str_replace("|", ", ", $cocktails[$i]['ingredients']) //On remplace les | dans la description par des , pour rendre la description plus lisible   ?></p>
-                        <p>Préparation : <?= $cocktails[$i]['preparation'] ?></p>-->
+            <a href='VisualisationRecette/index.php?cocktail=<?= $cocktails[$i]['nom'] ?>'><h3> <?= $cocktails[$i]['nom'] ?></h3></a>
         </div>
     <?php }
     return array($cocktails, $nomImage, $nomFinal);

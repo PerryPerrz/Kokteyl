@@ -7,6 +7,7 @@ session_start();
 include_once("../StructurePage/entete.php");
 include_once("../StructurePage/menu.php");
 include_once("../AccesHierarchique/fonctionsPanier.php");
+include_once ("../StructurePage/formatageString.php");
 ?>
 
 <div class="w3-main w3-content w3-padding w3-center w3-animate-opacity" style="max-width:1200px;margin-top:100px">
@@ -15,13 +16,6 @@ include_once("../AccesHierarchique/fonctionsPanier.php");
             <h2>Nos propositions de cocktails</h2>
             <span>Cliquez sur un filtre pour afficher les boissons utilisant cet ingrédient, cliquez à nouveau desssus pour l'enlever.</span>
         </div>
-
-        <?php
-
-
-        include_once ("../StructurePage/formatageString.php")
-
-        ?>
 
         <h2>Voici nos filtres</h2><br>
         <div>
