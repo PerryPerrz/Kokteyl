@@ -148,3 +148,33 @@
         xmlhttp.send();
     }
 </script>
+
+<?php
+function connexion()
+{
+    try {
+        // On se connecte à MySQL
+        $bdd = new PDO('mysql:host=localhost;dbname=Kokteyl;charset=utf8', 'root', '');
+        return $bdd;
+    } catch (Exception $e) {
+        // En cas d'erreur, on affiche un message et on arrête tout
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+function sousCategorie($categorie): string
+{
+    if (!str_contains($categorie, "\'")) {
+        $nomBis = str_replace("'", "\'", $categorie);
+    }
+    $sql = "SELECT nom FROM SuperCategorie WHERE nomSuper = '" . $nomBis . "'";
+    $bdd = connexion();
+    $req = $bdd->query($sql);
+    while ($donnees = $req->fetch()) {
+        if (!str_contains($donnees['nom'], "\'")) {
+            $nomCat = str_replace("'", "\'", $donnees['nom']);
+        }
+        $sql .= " OR nom IN (" . sousCategorie($nomCat) . ")";
+    }
+    return $sql;
+}

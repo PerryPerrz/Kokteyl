@@ -53,7 +53,7 @@ $sql = "CREATE DATABASE IF NOT EXISTS $db;
           utilisateur VARCHAR(100),
           nomRecette VARCHAR(100),
           PRIMARY KEY (utilisateur, nomRecette),
-          CONSTRAINT FK_PanierUtilisateur FOREIGN KEY (utilisateur) REFERENCES Utilisateur(login),
+          CONSTRAINT FK_PanierUtilisateur FOREIGN KEY (utilisateur) REFERENCES Utilisateur(login) ON UPDATE CASCADE,
           CONSTRAINT FK_PanierRecette FOREIGN KEY (nomRecette) REFERENCES Recettes(nom)
         )";
 

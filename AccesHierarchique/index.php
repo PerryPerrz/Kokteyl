@@ -17,64 +17,9 @@ include_once("../AccesHierarchique/fonctionsPanier.php");
         </div>
 
         <?php
-        function connexion()
-        {
-            try {
-                // On se connecte à MySQL
-                $bdd = new PDO('mysql:host=localhost;dbname=Kokteyl;charset=utf8', 'root', '');
-                return $bdd;
-            } catch (Exception $e) {
-                // En cas d'erreur, on affiche un message et on arrête tout
-                die('Erreur : ' . $e->getMessage());
-            }
-        }
 
-        function sousCategorie($categorie): string
-        {
-            if (!str_contains($categorie, "\'")) {
-                $nomBis = str_replace("'", "\'", $categorie);
-            }
-            $sql = "SELECT nom FROM SuperCategorie WHERE nomSuper = '" . $nomBis . "'";
-            $bdd = connexion();
-            $req = $bdd->query($sql);
-            while ($donnees = $req->fetch()) {
-                if (!str_contains($donnees['nom'], "\'")) {
-                    $nomCat = str_replace("'", "\'", $donnees['nom']);
-                }
-                $sql .= " OR nom IN (" . sousCategorie($nomCat) . ")";
-            }
-            return $sql;
-        }
 
-        //Fonction qui remplace les accents, les espaces et les apostrophes d'un string utilse pour charger les images à partir du nom des cocktails.
-        function formatageString($str): string
-        {
-            $strSansAcc = $str; //Lettre sans accent
-            $strSansAcc = preg_replace('#Ç#', 'C', $strSansAcc);
-            $strSansAcc = preg_replace('#ç#', 'c', $strSansAcc);
-            $strSansAcc = preg_replace('#è|é|ê|ë#', 'e', $strSansAcc);
-            $strSansAcc = preg_replace('#È|É|Ê|Ë#', 'E', $strSansAcc);
-            $strSansAcc = preg_replace('#à|á|â|ã|ä|å#', 'a', $strSansAcc);
-            $strSansAcc = preg_replace('#@|À|Á|Â|Ã|Ä|Å#', 'A', $strSansAcc);
-            $strSansAcc = preg_replace('#ì|í|î|ï#', 'i', $strSansAcc);
-            $strSansAcc = preg_replace('#Ì|Í|Î|Ï#', 'I', $strSansAcc);
-            $strSansAcc = preg_replace('#ð|ò|ó|ô|õ|ö#', 'o', $strSansAcc);
-            $strSansAcc = preg_replace('#Ò|Ó|Ô|Õ|Ö#', 'O', $strSansAcc);
-            $strSansAcc = preg_replace('#ù|ú|û|ü#', 'u', $strSansAcc);
-            $strSansAcc = preg_replace('#Ù|Ú|Û|Ü#', 'U', $strSansAcc);
-            $strSansAcc = preg_replace('#ý|ÿ#', 'y', $strSansAcc);
-            $strSansAcc = preg_replace('#Ý#', 'Y', $strSansAcc);
-            $strSansAcc = preg_replace('#ñ#', 'n', $strSansAcc);
-
-            $sansEspaces = str_replace(' ', '_', $strSansAcc);
-            $sansAppostrophe = str_replace("'", '', $sansEspaces);
-
-            //On veut le string au format : première lettre est une majuscule, tout le reste est en minuscule (pour un affichage PROPRE)
-            $lettreEnMaj = substr($sansAppostrophe, 0, 1); //On récup la première lettre
-            $suiteDeMot = strtolower(substr($sansAppostrophe, 1));
-
-            return ($lettreEnMaj . $suiteDeMot);
-        }
+        include_once ("../StructurePage/formatageString.php")
 
         ?>
 
@@ -174,73 +119,8 @@ include_once("../AccesHierarchique/fonctionsPanier.php");
 
                 <?php
                     for ($i = 0; $i < $parPage / 2; ++$i) {
-                        //On ne parcourt pas les élements vides de l'Array
-                        if (!empty($cocktails[$i])) {
-                            $nomImage = formatageString($cocktails[$i]['nom']);
-                            $nomFinal = $cheminImage . $nomImage . ".jpg";
-                ?>
-                        <div class="w3-quarter">
-                            <div class="img w3-hover-opacity">
-                                <?php
-                                $nomCocktail = $cocktails[$i]['nom'];
-
-                                //Si le cocktail à une image, on l'affiche sinon on affiche une image par défaut
-                                if (file_exists($nomFinal)) {
-                                    echo "<img src=\"" . $nomFinal . "\" alt=\"" . $nomCocktail . "\" class = \"images\" onclick=\"";
-                                } else {
-                                    echo "<img src=\"../Ressources/defaultboisson.png\" alt=\"Image à clicker pour ajouter l'article " . $nomCocktail . " au panier\" class = \"images\" onclick=\"";
-                                }
-
-                                //Si le cocktail contient le caractère spécial ' non échappé, on l'échappe
-                                //$nomCocktail = str_replace("'", "\'", $cocktails[$i]['nom']);
-
-                                //On vérifie si la recette est dans le panier de l'utilisateur, si oui un click sur l'image l'enlève, si non, un click sur l'image l'ajoute.
-                                //Si l'utilisateur est connecté
-                                if (isset($_SESSION['login'])) {
-
-                                    $estDansPanier = false;
-                                    //On parcours le panier de l'utilisateur pour savoir si le cocktail est dedans
-                                    $panier = $bdd->prepare("SELECT nomRecette FROM Panier WHERE utilisateur = :utilisateur");
-                                    $panier->bindParam(":utilisateur", $_SESSION['login']);
-                                    $panier->execute();
-                                    while ($cocktail = $panier->fetch()) {
-                                        if ($cocktail['nomRecette'] == $nomCocktail)
-                                            $estDansPanier = true;
-                                    }
-
-                                    $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                                    //Si le cocktail est dans le panier on propose de le supprimer et inversement sinon
-                                    if ($estDansPanier) {
-                                        echo "suppRecette('" . $_SESSION['login'] . "','" . $nomCocktail . "')";
-                                    } else {
-                                        echo "ajoutRecette('" . $_SESSION['login'] . "','" . $nomCocktail . "')";
-                                    }
-                                } else { //Si l'utilisateur n'est pas connecté
-                                    //Si l'utilisateur à déjà ajouté ou supprimé le cocktail au panier
-                                    if (isset($_SESSION['panier'][$nomCocktail])) {
-                                        //Si il est actuellement ajouté au panier on le supprime lors d'un click sur l'image
-                                        if ($_SESSION['panier'][$nomCocktail]) {
-                                            $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                                            echo "suppCookie('" . $nomCocktail . "')";
-                                        } else { //Si il n'est pas dans le panier on l'ajoute lors d'un click sur l'image
-                                            $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                                            echo "addCookie('" . $nomCocktail . "')";
-                                        }
-                                    } else { //Sinon, on ajoute le cocktail au panier lors d'un click sur l'image
-                                        $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                                        echo "addCookie('" . $nomCocktail . "')";
-                                    }
-                                }
-                                ?>
-                                ">
-                            </div>
-                            <h3> <?= $cocktails[$i]['nom'] ?></h3>
-                            <p>Ingrédients
-                                : <?= str_replace("|", ", ", $cocktails[$i]['ingredients']) //On remplace les | dans la description par des , pour rendre la description plus lisible  
-                                    ?></p>
-                            <p>Préparation : <?= $cocktails[$i]['preparation'] ?></p>
-                        </div>
-                <?php }
+                        //On affiche les cocktails 1 par 1
+                        include ("affichageCocktailsHierarchique.php");
                     }
                 ?>
             </div>
@@ -250,85 +130,16 @@ include_once("../AccesHierarchique/fonctionsPanier.php");
                 <?php
 
                     for ($i = $parPage / 2; $i < $parPage; ++$i) {
-                        //On ne parcourt pas les élements vides de l'Array
-                        if (!empty($cocktails[$i])) {
-                            $nomImage = formatageString($cocktails[$i]['nom']);
-                            $nomFinal = $cheminImage . $nomImage . ".jpg";
-                ?>
-                        <div class="w3-quarter">
-                            <div class="img w3-hover-opacity">
-                                <?php
-                                //Si le cocktail à une image, on l'affiche sinon on affiche une image par défaut
-                                if (file_exists($nomFinal)) {
-                                    echo "<img src=\"" . $nomFinal . "\" alt=\"" . $cocktails[$i]['nom'] . "\" class = \"images\" onclick=\"";
-                                } else {
-                                    echo "<img src=\"../Ressources/defaultboisson.png\" alt=\"Image à clicker pour ajouter l'article " . $cocktails[$i]['nom'] . " au panier\" class = \"images\" onclick=\"";
-                                }
-
-                                //On vérifie si la recette est dans le panier de l'utilisateur, si oui un click sur l'image l'enlève, si non, un click sur l'image l'ajoute.
-                                //Si l'utilisateur est connecté
-                                if (isset($_SESSION['login'])) {
-                                    $estDansPanier = false;
-                                    //On parcours le panier de l'utilisateur pour savoir si le cocktail est dedans
-                                    $panier = $bdd->prepare("SELECT nomRecette FROM Panier WHERE utilisateur = :utilisateur");
-                                    $panier->bindParam(":utilisateur", $_SESSION['login']);
-                                    $panier->execute();
-                                    while ($cocktail = $panier->fetch()) {
-                                        if ($cocktail['nomRecette'] == $cocktails[$i]['nom'])
-                                            $estDansPanier = true;
-                                    }
-                                    //Si le cocktail est dans le panier on propose de le supprimer et inversement sinon
-                                    if ($estDansPanier) {
-                                        echo "suppRecette('" . $_SESSION['login'] . "','" . $cocktails[$i]['nom'] . "')";
-                                    } else {
-                                        echo "ajoutRecette('" . $_SESSION['login'] . "','" . $cocktails[$i]['nom'] . "')";
-                                    }
-                                } else { //Si l'utilisateur n'est pas connecté
-                                    //Si l'utilisateur à déjà ajouté ou supprimé le cocktail au panier
-                                    if (isset($_SESSION['panier'][$cocktails[$i]['nom']])) {
-                                        //Si il est actuellement ajouté au panier on le supprime lors d'un click sur l'image
-                                        if ($_SESSION['panier'][$cocktails[$i]['nom']] == true) {
-                                            echo "suppCookie('" . $cocktails[$i]['nom'] . "')";
-                                        } else { //Si il n'est pas dans le panier on l'ajoute lors d'un click sur l'image
-                                            echo "addCookie('" . $cocktails[$i]['nom'] . "')";
-                                        }
-                                    } else { //Sinon, on ajoute le cocktail au panier lors d'un click sur l'image
-                                        echo "addCookie('" . $cocktails[$i]['nom'] . "')";
-                                    }
-                                }
-                                ?>
-                                ">
-                            </div>
-                            <h3> <?= $cocktails[$i]['nom'] ?></h3>
-                            <p>Ingrédients
-                                : <?= str_replace("|", ", ", $cocktails[$i]['ingredients']) //On remplace les | dans la description par des , pour rendre la description plus lisible  
-                                    ?></p>
-                            <p>Préparation : <?= $cocktails[$i]['preparation'] ?></p>
-                        </div>
-
-                <?php }
+                        //On affiche les cocktails 1 par 1
+                        include("affichageCocktailsHierarchique.php");
                     }
                 ?>
             </div>
+
             <!-- Pagination -->
-            <div class="w3-center w3-padding-32">
-                <div class="w3-bar">
-                    <!-- Lorsque l'on clique sur la flèche précedante, cela ramène l'utilisateur sur la page précedente, si celle-ci n'existe pas, le bouton n'est pas cliquable-->
-                    <a href="./?page=<?= $currentPage - 1 ?>" class="w3-bar-item w3-button w3-hover-black <?= ($currentPage == 1) ? "disable" : "" ?>">«</a>
-
-                    <!-- On créer des boutons qui permettent de naviguer entre les pages, si on est sur la page correspondante à un bouton, celui-ci est mis en valeur-->
-                    <?php for ($i = 1; $i <= $nbPages; ++$i) {
-                    ?>
-                        <a href="./?page=<?= $i ?>" class="<?= ($currentPage == $i) ? "w3-bar-item w3-black w3-button" : "w3-bar-item w3-button w3-hover-black" ?>"><?= $i ?></a>
-                    <?php } ?>
-
-                    <!-- Lorsque l'on clique sur la flèche suivante, cela ramène l'utilisateur sur la page suivante, si celle-ci n'existe pas, le bouton n'est pas cliquable-->
-                    <a href=" ./?page=<?= $currentPage + 1 ?>" class="w3-bar-item w3-button w3-hover-black <?= ($currentPage == $nbPages) ? "disable" : "" ?>">»</a>
-                </div>
-            </div>
-            <hr id="about">
-
-    <?php
+            <?php
+                //On affiche et mets en place la pagination
+                include_once ("../StructurePage/pagination.php");
                 }
             } ?>
         </div>
