@@ -9,7 +9,7 @@ include_once("../StructurePage/menu.php");
 include_once("../AccesHierarchique/fonctionsPanier.php");
 ?>
 
-<div class="w3-main w3-content w3-padding w3-center" style="max-width:1200px;margin-top:100px">
+<div class="w3-main w3-content w3-padding w3-center w3-animate-opacity" style="max-width:1200px;margin-top:100px">
     <div id="staff" class="container">
         <div class="title">
             <h2>Nos propositions de cocktails</h2>

@@ -1124,10 +1124,25 @@ a {
 }
 
 .w3-spin {
-    animation: w3-spin 0.2s linear
+    animation: w3-spin 2s infinite linear
 }
 
 @keyframes w3-spin {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(359deg)
+    }
+}
+
+/* Classe d'animation rajoutée pour secouer le caddie quand l'utilisateur ajoute ou retire un élément du panier
+   Est appelée dès que l'on rafraichit la page car nous n'avons pas trouvé comment faire autrement */
+.w3-shake {
+    animation: w3-shake 0.2s linear
+}
+
+@keyframes w3-shake {
     0% {
         transform: rotate(0deg)
     }
@@ -1162,7 +1177,7 @@ a {
 }
 
 .w3-animate-opacity {
-    animation: opac 0.8s
+    animation: opac 0.2s
 }
 
 @keyframes opac {

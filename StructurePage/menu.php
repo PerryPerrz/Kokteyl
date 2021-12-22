@@ -30,7 +30,7 @@ if (file_exists("../StructurePage/nbCocktailsPanier.php")) {
 <div class="w3-top">
     <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
         <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
-        <div class="w3-right w3-padding-16 w3-spin"><a id="caddie" href="../Panier/"><img src="../Ressources/caddie<?= nbCocktailsPanier() ?>.png" /></a></div>
+        <div class="w3-right w3-padding-16 w3-shake"><a id="caddie" href="../Panier/"><img src="../Ressources/caddie<?= nbCocktailsPanier() ?>.png" /></a></div>
         <div class="w3-center w3-padding-16"><a id="logo" href="../"><img src="../Ressources/logoKok.png" /></a></div>
     </div>
 </div>
