@@ -12,6 +12,8 @@
         xmlhttp.onreadystatechange = function() {
             if (!this.readyState == 4) { //Si l'appel n'est pas terminé
                 xmlhttp.send();
+            } else {
+                document.location.reload();
             }
         };
         xmlhttp.open("GET", "../AccesHierarchique/addCocktail.php?p=" + str, true);
@@ -31,6 +33,8 @@
         xmlhttp.onreadystatechange = function() {
             if (!this.readyState == 4) { //Si l'appel n'est pas terminé
                 xmlhttp.send();
+            } else {
+                document.location.reload();
             }
         };
         xmlhttp.open("GET", "../AccesHierarchique/suppCocktail.php?p=" + str, false);
@@ -50,6 +54,9 @@
         xmlhttp.onreadystatechange = function() {
             if (!this.readyState == 4) { //Si l'appel n'est pas terminé
                 xmlhttp.send();
+            }
+            else {
+                document.location.reload();
             }
         };
         xmlhttp.open("GET", "../AccesHierarchique/addCookie.php?p=" + recette, true);
@@ -71,6 +78,9 @@
             if (!this.readyState == 4) { //Si l'appel n'est pas terminé
                 xmlhttp.send();
             }
+            else {
+                document.location.reload(); //Refresh les élements de la page sans bouger l'utilisateur.
+            }
         };
         xmlhttp.open("GET", "../AccesHierarchique/suppCookie.php?p=" + recette, true);
         xmlhttp.send();
@@ -89,7 +99,7 @@
 
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4) {
-                document.location.href = "./";
+                document.location.href = "./"; //Refresh + remet au début d'une page.
             } else {
                 xmlhttp.send();
             }
