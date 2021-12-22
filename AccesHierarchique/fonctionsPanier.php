@@ -54,8 +54,7 @@
         xmlhttp.onreadystatechange = function() {
             if (!this.readyState == 4) { //Si l'appel n'est pas terminé
                 xmlhttp.send();
-            }
-            else {
+            } else {
                 document.location.reload();
             }
         };
@@ -77,8 +76,7 @@
         xmlhttp.onreadystatechange = function() {
             if (!this.readyState == 4) { //Si l'appel n'est pas terminé
                 xmlhttp.send();
-            }
-            else {
+            } else {
                 document.location.reload(); //Refresh les élements de la page sans bouger l'utilisateur.
             }
         };
@@ -98,10 +96,10 @@
         }
 
         xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-                document.location.href = "./"; //Refresh + remet au début d'une page.
-            } else {
+            if (!this.readyState == 4) {
                 xmlhttp.send();
+            } else {
+                document.location.href = "./"; //Refresh + remet au début d'une page.
             }
         };
         xmlhttp.open("GET", "../AccesHierarchique/sousCat.php?p=" + superCat, true);
@@ -119,10 +117,10 @@
         }
 
         xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-                document.location.href = "./";
-            } else {
+            if (!this.readyState == 4) {
                 xmlhttp.send();
+            } else {
+                document.location.href = "./";
             }
         };
         xmlhttp.open("GET", "../AccesHierarchique/backLead.php?p=" + categorie, true);
@@ -140,10 +138,10 @@
         }
 
         xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-                document.location.href = "./";
-            } else {
+            if (!this.readyState == 4) {
                 xmlhttp.send();
+            } else {
+                document.location.href = "./";
             }
         };
         xmlhttp.open("GET", "../AccesHierarchique/viderPanier.php", true);
