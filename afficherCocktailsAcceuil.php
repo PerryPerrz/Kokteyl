@@ -60,7 +60,7 @@ function afficherCocktails(bool|array $cocktails, int $i, string $cheminImage): 
                         echo "addCookie('" . $nomCocktail . "')";
                     }
                 }
-                $nomBis = str_replace("'", "-",$cocktails[$i]['nom']);
+                $nomBis = str_replace("'", "-_-",$cocktails[$i]['nom']);
                 ?>
                 ">
             </div>

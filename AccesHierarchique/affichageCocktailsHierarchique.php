@@ -6,7 +6,7 @@
 if (!empty($cocktails[$i])) {
     $nomImage = formatageString($cocktails[$i]['nom']);
     $nomFinal = $cheminImage . $nomImage . ".jpg";
-    ?>
+?>
     <div class="w3-quarter">
         <div class="img w3-hover-opacity">
             <?php
@@ -59,10 +59,12 @@ if (!empty($cocktails[$i])) {
                     echo "addCookie('" . $nomCocktail . "')";
                 }
             }
-            $nomBis = str_replace("'", "-",$cocktails[$i]['nom']);
+            $nomBis = str_replace("'", "-_-", $cocktails[$i]['nom']);
             ?>
             ">
         </div>
-        <a href='../VisualisationRecette/index.php?cocktail=<?=$nomBis?>'><h3> <?= $cocktails[$i]['nom'] ?></h3></a>
+        <a href='../VisualisationRecette/index.php?cocktail=<?= $nomBis ?>'>
+            <h3> <?= $cocktails[$i]['nom'] ?></h3>
+        </a>
     </div>
 <?php }

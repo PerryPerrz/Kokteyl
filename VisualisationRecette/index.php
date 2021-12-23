@@ -11,11 +11,11 @@ include_once("../fonctionsJS/fonctionsPanier.php");
 
 //On ne parcourt pas les élements vides de l'Array
 if (isset($_GET['cocktail'])) {
-    $nomCocktail = str_replace("-", "'",$_GET['cocktail']);
-    $nomBis = str_replace("-", "'",$_GET['cocktail']);
+    $nomCocktail = str_replace("-_-", "'", $_GET['cocktail']);
+    $nomBis = str_replace("-_-", "'", $_GET['cocktail']);
     $nomImage = formatageString($nomCocktail);
     $nomFinal = "../Photos/" . $nomImage . ".jpg";
-    ?>
+?>
     <div class="w3-main w3-content w3-padding w3-centerr" style="max-width:1200px;margin-top:100px">
         <div class="w3-hover-opacity w3-center">
 
@@ -72,13 +72,17 @@ if (isset($_GET['cocktail'])) {
         </div>
         <h3 class="w3-center"> <?= $nomBis ?></h3>
         <?php
-            $infos = $bdd->prepare("SELECT ingredients, preparation FROM Recettes WHERE nom = :nom");
-            $infos->bindParam(":nom", $nomBis);
-            $infos->execute();
-            $infoCocktail = $infos->fetch()
+        $infos = $bdd->prepare("SELECT ingredients, preparation FROM Recettes WHERE nom = :nom");
+        $infos->bindParam(":nom", $nomBis);
+        $infos->execute();
+        $infoCocktail = $infos->fetch()
         ?>
-        <p class="w3-center">Ingrédients : <?= str_replace("|", ", ", $infoCocktail['ingredients'])?></p> <!--On remplace les | dans la description par des , pour rendre la description plus lisible -->
+        <p class="w3-center">Ingrédients : <?= str_replace("|", ", ", $infoCocktail['ingredients']) ?></p>
+        <!--On remplace les | dans la description par des , pour rendre la description plus lisible -->
         <p class="w3-center">Préparation : <?= $infoCocktail['preparation'] ?></p>
+        <div class="w3-center">
+            <button class='w3-center glow-on-hover' onclick="history.go(-1)">Retour</button>
+        </div>
     </div>
 <?php
 }
