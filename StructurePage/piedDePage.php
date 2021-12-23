@@ -2,73 +2,110 @@
 <!-- Ce code est présent dans toutes les pages à l'exception de l'acceuil car les liens utilisés ne sont pas les mêmes. -->
 <!-- Fichier correspondant au pied de page du site -->
 
-<hr id="about">
-
-<!-- About Section -->
+<!-- Slideshow -->
 <div class="w3-container w3-padding-32 w3-center">
-    <h3>About Me, The drink Man</h3><br>
-    <img src="/w3images/chef.jpg" alt="Me" class="w3-image" style="display:block;margin:auto" width="800" height="533">
-    <div class="w3-padding-32">
-        <h4><b>I am Who I Am!</b></h4>
-        <h6><i>With Passion For Real, Good drink</i></h6>
-        <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem
-            ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut
-            rutrum. Sed vitae justo
-            condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla. Praesent tincidunt sed tellus
-            ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+    <h3>La sélection du jour</h3><br>
+
+    <div class="w3-content w3-section" style="max-width:500px">
+        <a class="myTitles w3-animate-left" href="../VisualisationRecette/index.php?cocktail=Builder" style="width:100%">
+            <h3>Bob the builder</h3>
+        </a>
+        <a class="myTitles w3-animate-left" href="../VisualisationRecette/index.php?cocktail=Coconut kiss" style="width:100%">
+            <h3>"Le goût des tropiques dans un verre" <br>Gilbert Montagné</h3>
+        </a>
+        <a class="myTitles w3-animate-left" href="../VisualisationRecette/index.php?cocktail=Margarita" style="width:100%">
+            <h3>Tequila ou Tequipala</h3>
+        </a>
+        <a class="myTitles w3-animate-left" href="../VisualisationRecette/index.php?cocktail=Cuba libre" style="width:100%">
+            <h3>Rhum-Coca</h3>
+        </a>
     </div>
+
+    <div class="w3-content w3-section" style="max-width:500px">
+        <img class="mySlides w3-animate-left" src="../Photos/Builder.jpg" style="width:100%">
+        <img class="mySlides w3-animate-left" src="../Photos/Coconut_kiss.jpg" style="width:100%">
+        <img class="mySlides w3-animate-left" src="../Photos/Margarita.jpg" style="width:100%">
+        <img class="mySlides w3-animate-left" src="../Photos/Cuba_libre.jpg" style="width:100%">
+    </div>
+
+    <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) {
+                myIndex = 1
+            }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 4000);
+        }
+
+        var myIndex2 = 0;
+        carousel2();
+
+        function carousel2() {
+            var i;
+            var x = document.getElementsByClassName("myTitles");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex2++;
+            if (myIndex2 > x.length) {
+                myIndex2 = 1
+            }
+            x[myIndex2 - 1].style.display = "block";
+            setTimeout(carousel2, 4000);
+        }
+    </script>
 </div>
 <hr>
 
 <!-- Footer -->
+<hr id="about">
 <footer class="w3-row-padding w3-padding-32">
     <div class="w3-third">
-        <h3>FOOTER</h3>
-        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue
-            gravida diam non fringilla.</p>
+        <h3>DESCRIPTION</h3>
+        <p>Kokteyl est un site web de gestions de recettes de cocktails.</p>
+        <p>2021-2022</p>
         <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
     </div>
 
     <div class="w3-third">
-        <h3>BLOG POSTS</h3>
+        <h3>DEVELOPPEMENT</h3>
         <ul class="w3-ul w3-hoverable">
             <li class="w3-padding-16">
-                <img src="/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
-                <span class="w3-large">Lorem</span><br>
-                <span>Sed mattis nunc</span>
+                <img src="../Ressources/Roselmo.png" class="w3-left w3-margin-right" style="width:50px">
+                <span class="w3-large">Hugo Iopeti</span><br>
+                <span>Développeur</span>
             </li>
             <li class="w3-padding-16">
-                <img src="/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
-                <span class="w3-large">Ipsum</span><br>
-                <span>Praes tinci sed</span>
+                <img src="../Ressources/Nigelmo.png" class="w3-left w3-margin-right" style="width:50px">
+                <span class="w3-large">Ludovic Yvoz</span><br>
+                <span>Développeur</span>
             </li>
         </ul>
     </div>
 
     <div class="w3-third w3-serif">
-        <h3>POPULAR TAGS</h3>
+        <h3>AVIS</h3>
         <p>
-            <span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span
-                    class="w3-tag w3-dark-grey w3-small w3-margin-bottom">New York</span> <span
-                    class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dinner</span>
-            <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Salmon</span> <span
-                    class="w3-tag w3-dark-grey w3-small w3-margin-bottom">France</span> <span
-                    class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Drinks</span>
-            <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Ideas</span> <span
-                    class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Flavors</span> <span
-                    class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Cuisine</span>
-            <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Chicken</span> <span
-                    class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dressing</span> <span
-                    class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Fried</span>
-            <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Fish</span> <span
-                    class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Duck</span>
+            <span class="w3-tag w3-black w3-margin-bottom">"Meilleur site de la décennie"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">CEO de Google</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Californie</span>
+            <span class="w3-tag w3-black w3-margin-bottom">"Un choix de cocktails varié"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Gérard Depardieu</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Saransk</span>
+            <span class="w3-tag w3-black w3-margin-bottom">"Je peux sentir les couleurs"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dewey</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">TV cathodique 14"</span>
+            <span class="w3-tag w3-black w3-margin-bottom">"Mais c'était sur en fait"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Sardoche</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Guérande</span>
+            <span class="w3-tag w3-black w3-margin-bottom">"20/20, juste exceptionnel"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">AlloCiné</span>
         </p>
     </div>
 </footer>
 
 <!-- End page content -->
 </div>
-
 
 </body>
 

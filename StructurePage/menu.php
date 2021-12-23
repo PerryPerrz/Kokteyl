@@ -14,7 +14,7 @@
         <a onclick="location.href='../Inscription/'" class="w3-bar-item w3-button">Inscription</a>
         <a onclick="location.href='../Connexion/'" class="w3-bar-item w3-button">Connexion</a>
     <?php } ?>
-
+    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">A propos de nous</a>
 </nav>
 
 <?php
