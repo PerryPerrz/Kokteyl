@@ -6,7 +6,7 @@ session_start();
 //On fait apparaître la structure du haut de la page
 include_once("../StructurePage/entete.php");
 include_once("../StructurePage/menu.php");
-include_once("../AccesHierarchique/fonctionsPanier.php");
+include_once("../fonctionsJS/fonctionsPanier.php");
 include_once ("../StructurePage/formatageString.php");
 ?>
 

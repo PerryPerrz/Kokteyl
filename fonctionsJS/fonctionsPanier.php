@@ -1,4 +1,16 @@
 <script>
+    var cheminDossier = "";
+    <?php
+    if (file_exists("../OuvertureBDD/index.php")) {
+        ?>
+        cheminDossier = "../fonctionsJS/"
+        <?php
+    } else if (file_exists("OuvertureBDD/index.php")) {
+        ?>
+        cheminDossier = "fonctionsJS/"
+        <?php
+    }
+    ?>
     //Fonction permettant d'ajouter une recette au panier quand l'utilisateur est connecté
     function ajoutRecette(user, recette) {
         if (window.XMLHttpRequest) {
@@ -16,7 +28,7 @@
                 document.location.reload();
             }
         };
-        xmlhttp.open("GET", "../AccesHierarchique/addCocktail.php?p=" + str, true);
+        xmlhttp.open("GET", cheminDossier + "addCocktail.php?p=" + str, true);
         xmlhttp.send();
     }
 
@@ -37,7 +49,7 @@
                 document.location.reload();
             }
         };
-        xmlhttp.open("GET", "../AccesHierarchique/suppCocktail.php?p=" + str, false);
+        xmlhttp.open("GET", cheminDossier + "suppCocktail.php?p=" + str, false);
         xmlhttp.send();
     }
 
@@ -58,7 +70,7 @@
                 document.location.reload();
             }
         };
-        xmlhttp.open("GET", "../AccesHierarchique/addCookie.php?p=" + recette, true);
+        xmlhttp.open("GET", cheminDossier + "addCookie.php?p=" + recette, true);
         xmlhttp.send();
     }
 
@@ -80,7 +92,7 @@
                 document.location.reload(); //Refresh les élements de la page sans bouger l'utilisateur.
             }
         };
-        xmlhttp.open("GET", "../AccesHierarchique/suppCookie.php?p=" + recette, true);
+        xmlhttp.open("GET", cheminDossier + "suppCookie.php?p=" + recette, true);
         xmlhttp.send();
     }
 
@@ -102,7 +114,7 @@
                 document.location.href = "./"; //Refresh + remet au début d'une page.
             }
         };
-        xmlhttp.open("GET", "../AccesHierarchique/sousCat.php?p=" + superCat, true);
+        xmlhttp.open("GET", cheminDossier + "sousCat.php?p=" + superCat, true);
         xmlhttp.send();
     }
 
@@ -123,7 +135,7 @@
                 document.location.href = "./";
             }
         };
-        xmlhttp.open("GET", "../AccesHierarchique/backLead.php?p=" + categorie, true);
+        xmlhttp.open("GET", cheminDossier + "backLead.php?p=" + categorie, true);
         xmlhttp.send();
     }
 
@@ -144,7 +156,7 @@
                 document.location.href = "./";
             }
         };
-        xmlhttp.open("GET", "../AccesHierarchique/viderPanier.php", true);
+        xmlhttp.open("GET", cheminDossier + "viderPanier.php", true);
         xmlhttp.send();
     }
 </script>

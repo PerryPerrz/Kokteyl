@@ -7,11 +7,12 @@ session_start();
 include_once("../StructurePage/entete.php");
 include_once("../StructurePage/menu.php");
 include_once("../StructurePage/formatageString.php");
-include_once("../AccesHierarchique/fonctionsPanier.php");
+include_once("../fonctionsJS/fonctionsPanier.php");
 
 //On ne parcourt pas les élements vides de l'Array
 if (isset($_GET['cocktail'])) {
-    $nomCocktail = $_GET['cocktail'];
+    $nomCocktail = str_replace("-", "'",$_GET['cocktail']);
+    $nomBis = str_replace("-", "'",$_GET['cocktail']);
     $nomImage = formatageString($nomCocktail);
     $nomFinal = "../Photos/" . $nomImage . ".jpg";
     ?>
@@ -69,19 +70,17 @@ if (isset($_GET['cocktail'])) {
             ?>
             ">
         </div>
-        <h3 class="w3-center"> <?= $nomCocktail ?></h3>
+        <h3 class="w3-center"> <?= $nomBis ?></h3>
         <?php
             $infos = $bdd->prepare("SELECT ingredients, preparation FROM Recettes WHERE nom = :nom");
-            $infos->bindParam(":nom", $nomCocktail);
+            $infos->bindParam(":nom", $nomBis);
             $infos->execute();
-            if ($infoCocktail = $infos->fetch()) {;
+            $infoCocktail = $infos->fetch()
         ?>
-        <p class="w3-center">Ingrédients
-            : <?= str_replace("|", ", ", $infoCocktail['ingredients']) //On remplace les | dans la description par des , pour rendre la description plus lisible
-            ?></p>
+        <p class="w3-center">Ingrédients : <?= str_replace("|", ", ", $infoCocktail['ingredients'])?></p> <!--On remplace les | dans la description par des , pour rendre la description plus lisible -->
         <p class="w3-center">Préparation : <?= $infoCocktail['preparation'] ?></p>
     </div>
-<?php }
+<?php
 }
 
 //On fait apparaître la structure du bas de la page

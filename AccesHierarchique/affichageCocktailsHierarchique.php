@@ -59,13 +59,10 @@ if (!empty($cocktails[$i])) {
                     echo "addCookie('" . $nomCocktail . "')";
                 }
             }
+            $nomBis = str_replace("'", "-",$cocktails[$i]['nom']);
             ?>
             ">
         </div>
-        <h3> <?= $cocktails[$i]['nom'] ?></h3>
-        <p>Ingrédients
-            : <?= str_replace("|", ", ", $cocktails[$i]['ingredients']) //On remplace les | dans la description par des , pour rendre la description plus lisible
-            ?></p>
-        <p>Préparation : <?= $cocktails[$i]['preparation'] ?></p>
+        <a href='../VisualisationRecette/index.php?cocktail=<?=$nomBis?>'><h3> <?= $cocktails[$i]['nom'] ?></h3></a>
     </div>
 <?php }
