@@ -9,11 +9,11 @@ include_once("../StructurePage/menu.php");
 ?>
 
 <div class="w3-main w3-content w3-padding w3-center" style="max-width:1200px;margin-top:100px">
-    <div class="title">
+    <div>
         <h2>Création du compte<br /></h2>
     </div>
-    <div id="page" class="container">
-        <div class="boxA">
+    <div>
+        <div>
             <h2>Inscription<br /></h2>
             <p>Les champs comportant le symbole <em>*</em> sont <strong>obligatoires.</strong></p>
         </div>

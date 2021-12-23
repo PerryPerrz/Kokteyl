@@ -46,9 +46,9 @@ include_once("../StructurePage/menu.php");
         ?>
     </h2>
     <br><br>
-    <div id="page" class="container">
-        <div class="boxA">
-            <form class="" action="#" method="post">
+    <div>
+        <div>
+            <form action="#" method="post">
                 <?php
                 // On vérifie ici que l'utilisateur a appuyé sur le bouton de validation des changements
                 if (isset($_POST["validation"])) {
@@ -194,9 +194,8 @@ include_once("../StructurePage/menu.php");
                 <br>
             </form>
         </div>
-        <div class="boxC">
-            <form class="" action="#" method="post">
-                <p>Email : <?php echo $_SESSION['login']; ?> </p>
+        <div>
+            <form action="#" method="post">
                 <?php if (isset($_POST["suppression"])) {
                     // On supprime l'utilisateur de la base de données si le bouton de suppression a été pressé
                     $requete = $bdd->prepare("DELETE FROM Utilisateur WHERE login = :login");

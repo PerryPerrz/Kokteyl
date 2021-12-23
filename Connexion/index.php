@@ -9,14 +9,14 @@ include_once("../StructurePage/menu.php");
 ?>
 
 <div class="w3-main w3-content w3-padding w3-center" style="max-width:1200px;margin-top:100px">
-    <div class="title">
+    <div>
         <h2>Connexion au compte<br /></h2>
     </div>
-    <div id="page" class="container">
-        <div class="boxA">
+    <div>
+        <div>
             <p>Les champs comportant le symbole <em>*</em> sont <strong>obligatoires.</strong></p>
         </div>
-        <div class="boxB">
+        <div>
             <form method="post" action="index.php">
                 <fieldset>
                     <legend>Informations du compte</legend>
@@ -54,11 +54,11 @@ include_once("../StructurePage/menu.php");
                                 header("Location: ../");
                             } else {
                                 /*Le mot de passe ne correspond pas au mail*/
-                                echo "<p class='error'>Le mode de passe est incorrecte !</p>";
+                                echo "<p>Le mode de passe est incorrecte !</p>";
                             }
                         } else {
                             /*Le mail n'est pas dans la base de données*/
-                            echo "<p class='error'>Mail inconnu !</p>";
+                            echo "<p>Mail inconnu !</p>";
                         }
                     }
                     ?>
@@ -67,7 +67,7 @@ include_once("../StructurePage/menu.php");
                 <p><input class="w3-button" name="submit" type="submit" value="Connexion"></p>
             </form>
         </div>
-        <div class="boxA">
+        <div>
             <br><br><br>
             <p><a href="../Inscription/"> Cliquez-ici </a> pour vous inscrire.</p>
         </div>

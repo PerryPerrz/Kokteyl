@@ -1,5 +1,5 @@
 <?php
-
+//Fichier qui recherche les ingrédients qui peuvent compléter la recherche de l'utilisateur
 include("../OuvertureBDD/index.php");
 
 $ing = $_GET['ing'];
