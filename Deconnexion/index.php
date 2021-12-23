@@ -13,13 +13,14 @@ include_once("../StructurePage/entete.php");
 include_once("../StructurePage/menu.php");
 ?>
 
-    <div id="wrapper">
-        <div id="staff" class="container">
-            <div class="title">
-                <h2>Déconnexion</h2>
-                <p>Vous êtes bien déconnecté. Pour revenir à la page d'accueil <a href="../">Cliquez ici</a></p></div>
+<div class="w3-main w3-content w3-padding w3-center" style="max-width:1200px;margin-top:100px">
+    <div id="staff" class="container">
+        <div class="title">
+            <h2>Déconnexion</h2>
+            <p>Vous êtes bien déconnecté. Pour revenir à la page d'accueil <a href="../">Cliquez ici</a></p>
         </div>
     </div>
+</div>
 
 <?php
 //On fait apparaître la structure du bas de la page

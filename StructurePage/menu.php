@@ -34,7 +34,6 @@ if (file_exists("../StructurePage/nbCocktailsPanier.php")) {
         <div class="w3-center w3-padding-16"><a id="logo" href="../"><img src="../Ressources/logoKok.png" /></a></div>
     </div>
 </div>
-
 <script>
     // Script to open and close sidebar
     function w3_open() {

@@ -198,8 +198,7 @@ session_start();
                 }
             </script>
         </div>
-        <hr>
-
+        
         <!-- Footer -->
         <hr id="about">
         <footer class="w3-row-padding w3-padding-32">
@@ -229,11 +228,11 @@ session_start();
             <div class="w3-third w3-serif">
                 <h3>AVIS</h3>
                 <p>
-                    <span class="w3-tag w3-black w3-margin-bottom">"Meilleur site de la décennie"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">CEO de Google</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Californie</span>
-                    <span class="w3-tag w3-black w3-margin-bottom">"Un choix de cocktails varié"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Gérard Depardieu</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Saransk</span>
-                    <span class="w3-tag w3-black w3-margin-bottom">"Je peux sentir les couleurs"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dewey</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">TV cathodique 14"</span>
-                    <span class="w3-tag w3-black w3-margin-bottom">"Mais c'était sur en fait"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Sardoche</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Guérande</span>
-                    <span class="w3-tag w3-black w3-margin-bottom">"20/20, juste exceptionnel"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">AlloCiné</span>
+                    <span class="w3-tag w3-black w3-margin-bottom">"Meilleur site de la décennie"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">CEO de Google</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Californie</span><br>
+                    <span class="w3-tag w3-black w3-margin-bottom">"Un choix de cocktails varié"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Gérard Depardieu</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Saransk</span><br>
+                    <span class="w3-tag w3-black w3-margin-bottom">"Je peux sentir les couleurs"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dewey</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">TV cathodique 14"</span><br>
+                    <span class="w3-tag w3-black w3-margin-bottom">"Mais c'était sur en fait"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Sardoche</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Guérande</span><br>
+                    <span class="w3-tag w3-black w3-margin-bottom">"20/20, juste exceptionnel"</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">AlloCiné</span><br>
                 </p>
             </div>
         </footer>

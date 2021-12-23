@@ -7,7 +7,7 @@ function afficherCocktails(bool|array $cocktails, int $i, string $cheminImage): 
         $nomCocktail = $cocktails[$i]['nom'];
         $nomImage = formatageString($cocktails[$i]['nom']);
         $nomFinal = $cheminImage . $nomImage . ".jpg";
-        ?>
+?>
         <div class="w3-quarter">
             <div class="img w3-hover-opacity">
                 <?php
@@ -29,6 +29,7 @@ function afficherCocktails(bool|array $cocktails, int $i, string $cheminImage): 
 
                     $estDansPanier = false;
                     //On parcours le panier de l'utilisateur pour savoir si le cocktail est dedans
+                    include("OuvertureBDD/index.php");
                     $panier = $bdd->prepare("SELECT nomRecette FROM Panier WHERE utilisateur = :utilisateur");
                     $panier->bindParam(":utilisateur", $_SESSION['login']);
                     $panier->execute();
@@ -60,12 +61,14 @@ function afficherCocktails(bool|array $cocktails, int $i, string $cheminImage): 
                         echo "addCookie('" . $nomCocktail . "')";
                     }
                 }
-                $nomBis = str_replace("'", "-_-",$cocktails[$i]['nom']);
+                $nomBis = str_replace("'", "-_-", $cocktails[$i]['nom']);
                 ?>
                 ">
             </div>
-            <a href='VisualisationRecette/index.php?cocktail=<?= $nomBis ?>'><h3> <?= $cocktails[$i]['nom'] ?></h3></a>
+            <a href='VisualisationRecette/index.php?cocktail=<?= $nomBis ?>'>
+                <h3> <?= $cocktails[$i]['nom'] ?></h3>
+            </a>
         </div>
-    <?php }
+<?php }
     return array($cocktails, $nomImage, $nomFinal);
 }
