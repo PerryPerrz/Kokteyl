@@ -76,7 +76,7 @@
     </div>
 
     <div class="w3-third">
-        <h3>DEVELOPPEMENT</h3>
+        <h3>DÉVELOPPEMENT</h3>
         <ul class="w3-ul w3-hoverable">
             <li class="w3-padding-16">
                 <img src="../Ressources/Roselmo.png" class="w3-left w3-margin-right" style="width:50px">
@@ -105,7 +105,6 @@
 
 <!-- End page content -->
 </div>
-
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 <?php
+/*On vide le panier de l'utilisateur dans la base de données si il est connecté, sinon on vide les cookies*/
 session_start();
 include_once("../OuvertureBDD/index.php");
 if (!isset($_SESSION['login'])) { //Si on est pas connecté

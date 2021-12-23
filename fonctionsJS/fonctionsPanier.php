@@ -1,14 +1,15 @@
+<!-- Le fichier contenant toutes les fonctions JS et PHP nécessaires à la bonne gestion du panier-->
 <script>
     var cheminDossier = "";
     <?php
     if (file_exists("../OuvertureBDD/index.php")) {
-        ?>
+    ?>
         cheminDossier = "../fonctionsJS/"
-        <?php
+    <?php
     } else if (file_exists("OuvertureBDD/index.php")) {
-        ?>
+    ?>
         cheminDossier = "fonctionsJS/"
-        <?php
+    <?php
     }
     ?>
     //Fonction permettant d'ajouter une recette au panier quand l'utilisateur est connecté

@@ -32,16 +32,16 @@ session_start();
 
     <!-- Sidebar (hidden by default) -->
     <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-        <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">Fermer menu</a>
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">Fermer</a>
         <a onclick="location.href='AccesHierarchique/'" class="w3-bar-item w3-button">Accéder aux cocktails</a>
         <?php if (isset($_SESSION['login'])) { ?>
-            <a onclick="location.href='Compte/'" class="w3-bar-item w3-button">Mon Compte</a>
-            <a onclick="location.href='Deconnexion/'" class="w3-bar-item w3-button">Deconnexion</a>
+            <a onclick="location.href='Compte/'" class="w3-bar-item w3-button">Mon compte</a>
+            <a onclick="location.href='Deconnexion/'" class="w3-bar-item w3-button">Déconnexion</a>
         <?php } else { ?>
             <a onclick="location.href='Inscription/'" class="w3-bar-item w3-button">Inscription</a>
             <a onclick="location.href='Connexion/'" class="w3-bar-item w3-button">Connexion</a>
         <?php } ?>
-        <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">A propos de nous</a>
+        <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">À propos de nous</a>
     </nav>
 
     <!-- Top menu -->
@@ -198,7 +198,7 @@ session_start();
                 }
             </script>
         </div>
-        
+
         <!-- Footer -->
         <hr id="about">
         <footer class="w3-row-padding w3-padding-32">
@@ -210,7 +210,7 @@ session_start();
             </div>
 
             <div class="w3-third">
-                <h3>DEVELOPPEMENT</h3>
+                <h3>DÉVELOPPEMENT</h3>
                 <ul class="w3-ul w3-hoverable">
                     <li class="w3-padding-16">
                         <img src="Ressources/Roselmo.png" class="w3-left w3-margin-right" style="width:50px">

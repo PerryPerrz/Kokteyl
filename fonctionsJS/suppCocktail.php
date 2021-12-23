@@ -1,4 +1,5 @@
 <?php
+/*Suppression du cocktail envoyé dans les paramètres de la page dans la panier de l'utilisateur connecté, action effectuée sur la base de données*/
 include("../OuvertureBDD/index.php");
 
 $tabRequete = explode("|", $_GET['p']);

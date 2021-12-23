@@ -14,16 +14,16 @@ include_once("../StructurePage/menu.php");
     </div>
     <div id="page" class="container">
         <div class="boxA">
-            <p>Les champs comportant le symbole <em>*</em> sont <strong>obligatoire</strong>.</p>
+            <p>Les champs comportant le symbole <em>*</em> sont <strong>obligatoires.</strong></p>
         </div>
         <div class="boxB">
             <form method="post" action="index.php">
                 <fieldset>
-                    <legend>Information du compte</legend>
-                    <label for="email">Email <em>*</em></label>
-                    <input name="email" type="email" placeholder="Email" required="" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"><br>
+                    <legend>Informations du compte</legend>
+                    <label for="mail">Mail <em>*</em></label>
+                    <input name="mail" type="mail" placeholder="Mail" required="" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"><br>
                     <label for="mdp">Mot de passe <em>*</em></label>
-                    <input type="password" name="mdp" required=""><br>
+                    <input type="password" name="mdp" placeholder="**********" required=""><br>
                     <?php
 
                     if (isset($_POST["submit"])) {
@@ -34,7 +34,7 @@ include_once("../StructurePage/menu.php");
                         $shamdp = $bdd->prepare("SELECT SHA1(:mdp) AS mdp FROM Utilisateur");
 
                         /*On test si le mail existe dans la base de données*/
-                        $mailVerification = $_POST['email'];
+                        $mailVerification = $_POST['mail'];
                         $verifMail->bindParam(':mailVerification', $mailVerification);
                         $verifMail->execute();
 
@@ -54,22 +54,22 @@ include_once("../StructurePage/menu.php");
                                 header("Location: ../");
                             } else {
                                 /*Le mot de passe ne correspond pas au mail*/
-                                echo "<p class='error'>Mot de passe incorrect</p>";
+                                echo "<p class='error'>Le mode de passe est incorrecte !</p>";
                             }
                         } else {
                             /*Le mail n'est pas dans la base de données*/
-                            echo "<p class='error'>Email inconnu</p>";
+                            echo "<p class='error'>Mail inconnu !</p>";
                         }
                     }
                     ?>
 
                 </fieldset>
-                <p><input name="submit" type="submit" value="Connexion"></p>
+                <p><input class="w3-button" name="submit" type="submit" value="Connexion"></p>
             </form>
         </div>
         <div class="boxA">
             <br><br><br>
-            <p>Si vous n'êtes pas inscrit <a href="../Inscription/"> cliquez ici </a>.</p>
+            <p><a href="../Inscription/"> Cliquez-ici </a> pour vous inscrire.</p>
         </div>
     </div>
 </div>

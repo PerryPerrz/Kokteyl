@@ -1,4 +1,5 @@
 <?php
+/*Lorsque l'on clique sur un filtre pour revenir en arrière*/
 session_start();
 $cat = $_GET['p'];
 $continuer = 1;

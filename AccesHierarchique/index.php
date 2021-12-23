@@ -7,13 +7,13 @@ session_start();
 include_once("../StructurePage/entete.php");
 include_once("../StructurePage/menu.php");
 include_once("../fonctionsJS/fonctionsPanier.php");
-include_once ("../StructurePage/formatageString.php");
+include_once("../StructurePage/formatageString.php");
 ?>
 
 <div class="w3-main w3-content w3-padding w3-center w3-animate-opacity" style="max-width:1200px;margin-top:100px">
     <div id="staff" class="container">
         <div class="title">
-            <h2>Nos propositions de cocktails</h2>
+            <h2>Notre proposition de cocktails</h2>
             <span>Cliquez sur un filtre pour afficher les boissons utilisant cet ingrédient, cliquez à nouveau desssus pour l'enlever.</span>
         </div>
 
@@ -114,7 +114,7 @@ include_once ("../StructurePage/formatageString.php");
                 <?php
                     for ($i = 0; $i < $parPage / 2; ++$i) {
                         //On affiche les cocktails 1 par 1
-                        include ("affichageCocktailsHierarchique.php");
+                        include("affichageCocktailsHierarchique.php");
                     }
                 ?>
             </div>
@@ -131,9 +131,9 @@ include_once ("../StructurePage/formatageString.php");
             </div>
 
             <!-- Pagination -->
-            <?php
-                //On affiche et mets en place la pagination
-                include_once ("../StructurePage/pagination.php");
+    <?php
+                    //On affiche et mets en place la pagination
+                    include_once("../StructurePage/pagination.php");
                 }
             } ?>
         </div>

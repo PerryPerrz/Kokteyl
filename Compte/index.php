@@ -8,16 +8,15 @@ include_once("../StructurePage/entete.php");
 include_once("../StructurePage/menu.php");
 ?>
 
-<div id="wrapper">
+<div class="w3-main w3-content w3-padding w3-center" style="max-width:1200px;margin-top:100px">
     <h2>
         <?php
 
         //Procédure permettant de factoriser le code.
         //La procédure permet de changer la valeur d'une donnée dans la base de données,
-        //la données est rentrée par l'utilisateur lors de la modification des données de son compte.
+        //La donnée est rentrée par l'utilisateur lors de la modification des données de son compte.
         function changerDonnee($donnees, $str_donnee_form, $str_donnee_bdd) {
-            //On ouvre la bdd et on ouvre la session car la fonction n'est pas appelée au chargement de la page
-            //mais quand l'utilisateur appuie sur le bouton enregistrer.
+            //On ouvre la bdd et on ouvre la session car la fonction n'est pas appelée au chargement de la page mais quand l'utilisateur appuie sur le bouton enregistrer.
             include ("../OuvertureBDD/index.php");
             session_start();
 
@@ -54,19 +53,19 @@ include_once("../StructurePage/menu.php");
                 // On vérifie ici que l'utilisateur a appuyé sur le bouton de validation des changements
                 if (isset($_POST["validation"])) {
                     // On vérifie ici que si l'utilisateur rentre un mot de passe, alors tous les champs de mots de passe sont rempli.
-                    if (isset($_POST['ancienMdp']) && !empty($_POST["ancienMdp"])) {
-                        if (SHA1($_POST["ancienMdp"]) == $donnees['mdp']) {
-                            if (isset($_POST['nouveauMdp']) && !empty($_POST["nouveauMdp"]) && $_POST["nouveauMdp"] != $_POST['ancienMdp']) {
-                                if (isset($_POST['confirmationMdp']) && !empty($_POST["confirmationMdp"]) && $_POST['nouveauMdp'] == $_POST['confirmationMdp']) {
-                                    $requete = $bdd->prepare("UPDATE Utilisateur SET mdp = SHA1(:mdpChanger) WHERE login = :loginSession");
+                    if (isset($_POST['oldMdp']) && !empty($_POST["oldMdp"])) {
+                        if (SHA1($_POST["oldMdp"]) == $donnees['mdp']) {
+                            if (isset($_POST['newMdp']) && !empty($_POST["newMdp"]) && $_POST["newMdp"] != $_POST['oldMdp']) {
+                                if (isset($_POST['confirmationMdp']) && !empty($_POST["confirmationMdp"]) && $_POST['newMdp'] == $_POST['confirmationMdp']) {
+                                    $requete = $bdd->prepare("UPDATE Utilisateur SET mdp = SHA1(:mdpChange) WHERE login = :loginSession");
                                     $loginSession = $_SESSION['login'];
-                                    $mdpChanger = $_POST['confirmationMdp'];
+                                    $mdpChange = $_POST['confirmationMdp'];
                                     $requete->bindParam('loginSession', $loginSession);
-                                    $requete->bindParam('mdpChanger', $mdpChanger);
+                                    $requete->bindParam('mdpChange', $mdpChange);
                                     $requete->execute();
                                     echo "Nouveau mdp créé";
                                 } else {
-                                    ?> <em> Mot de passe de confirmation manquant ou différents du nouveau mot de
+                                    ?> <em> Mot de passe de confirmation manquant ou différent du nouveau mot de
                                         passe </em> <?php
                                 }
                             } else {
@@ -90,40 +89,40 @@ include_once("../StructurePage/menu.php");
                         $requete->execute();
                         $_SESSION['login'] = $nouveauLogin;
 
-                        ?> <p>Modification enregistrée (email).</p><br/><?php
+                        ?> <p>Modification enregistrée (mail).</p><br/><?php
                     } else {
-                        ?> <p>Aucune modification n'a été apportée (email).</p><br/><?php
+                        ?> <p>Aucune modification n'a été apportée (mail).</p><br/><?php
                     }
 
 
-                    // On change l'adresse dans la base de données si l'utilisateur a essayé de la changer
+                    // Si l'utilisateur à changé l'adresse de son compte, on la modifie dans la base de données.
                     changerDonnee($donnees, 'adresse', 'adresse');
 
-                    // On change le nom dans la base de données si l'utilisateur a essayé de la changer
+                    // Si l'utilisateur à changé le nom de son compte, on la modifie dans la base de données.
                     changerDonnee($donnees, 'nom', 'nom');
 
-                    // On change le prénom dans la base de données si l'utilisateur a essayé de la changer
+                    // Si l'utilisateur à changé le prénom de son compte, on la modifie dans la base de données.
                     changerDonnee($donnees, 'prenom', 'prenom');
 
-                    // On change le code postal dans la base de données si l'utilisateur à essayé de la changer
+                    // Si l'utilisateur à changé le code postal de son compte, on la modifie dans la base de données.
                     changerDonnee($donnees, 'postal', 'postal');
 
-                    // On change le sexe dans la base de données si l'utilisateur à essayé de la changer
+                    // Si l'utilisateur à changé le sexe de son compte, on la modifie dans la base de données.
                     changerDonnee($donnees, 'sexe', 'sexe');
 
-                    // On change le numéro de téléphone dans la base de données si l'utilisateur à essayé de la changer
+                    // Si l'utilisateur à changé le téléphone de son compte, on la modifie dans la base de données.
                     changerDonnee($donnees, 'telephone', 'noTelephone');
 
-                    // On change la ville dans la base de données si l'utilisateur à essayé de la changer
+                    // Si l'utilisateur à changé la ville de son compte, on la modifie dans la base de données.
                     changerDonnee($donnees, 'ville', 'ville');
 
                     ?>
                     <button name="retour" action="./">Retour</button>
                     <?php
-                    // On vérifie que l'utilisateur a appuyé sur le bouton de modification des informations du compte
+                    // On vérifie que l'utilisateur veuille bien modifier les informations de son compte.
                 } else if (isset($_POST["modification"])) {
-                    // On rempli les champs du formulaire avec les informations contenues dans la base de données s'il y en a,
-                    // sinon on met un placeholder afin d'indiquer quel champs correspond à quelle information à modifier
+                    // On remplit les champs du formulaire avec les informations contenues dans la base de données.
+                    //Si il n'y à rien dans la base de données, on remplit le placeholder.
                     ?>
                     <input name="email" type="email" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"
                            value=<?= $donnees['login'] ?>><br><br>
@@ -137,13 +136,13 @@ include_once("../StructurePage/menu.php");
                         $prenom = htmlspecialchars($donnees['prenom'], ENT_QUOTES); ?>
                         <input name="prenom" value='<?= $prenom ?>'><br><br>
                     <?php } else { ?>
-                        <input name="prenom" placeholder="Nouveau prenom"><br><br>
+                        <input name="prenom" placeholder="Nouveau prénom"><br><br>
                     <?php } ?>
                     <select name="sexe">
                         <option value="default" name="bdd"><?= $donnees['sexe'] ?></option>
-                        <option value="N" name="aucun">Non renseigné</option>
-                        <option value="F" name="homme">Femme</option>
-                        <option value="H" name="femme">Homme</option>
+                        <option value="Non renseigné" name="aucun">Non renseigné</option>
+                        <option value="H" name="homme">Homme</option>
+                        <option value="F" name="femme">Femme</option>
                     </select><br><br>
                     <?php
                     if ($donnees['adresse'] != "null") {
@@ -167,16 +166,16 @@ include_once("../StructurePage/menu.php");
                         <input name="telephone" type="tel" pattern="0[3, 6, 9, 7, 2, 1][0-9]{8}"
                                value=<?= $donnees['noTelephone'] ?>><br><br>
                     <?php } else { ?>
-                        <input name="telephone" type="tel" placeholder="0xxxxxxxxx" pattern="0[3, 6, 9, 7, 2][0-9]{8}">
+                        <input name="telephone" type="tel" placeholder="**********" pattern="0[3, 6, 9, 7, 2][0-9]{8}">
                         <br><br>
                     <?php } ?>
                     <br>
-                    <input name="ancienMdp" type="password" placeholder="Ancien mot de passe"><br><br>
-                    <input name="nouveauMdp" type="password" placeholder="Nouveau mot de passe"><br><br>
-                    <input name="confirmationMdp" type="password" placeholder="Confirmation du nouveau mot de passe">
+                    <input name="oldMdp" type="password" placeholder="Ancien mot de passe"><br><br>
+                    <input name="newMdp" type="password" placeholder="Nouveau mot de passe"><br><br>
+                    <input name="confirmationMdp" type="password" placeholder="Nouveau mot de passe">
                     <br><br>
                     <br>
-                    <p><input name="validation" type="submit" value="Enregistrer"></p>
+                    <p><input class="w3-button" name="validation" type="submit" value="Enregistrer"></p>
                 <?php } else {
                     // On affiche les informations du compte de l'utilisateur
                     ?>
@@ -188,7 +187,7 @@ include_once("../StructurePage/menu.php");
                         if ($donnees['postal'] != 0) echo ' ' . $donnees['postal'];
                         if ($donnees['ville'] != "null") echo ' ' . $donnees['ville']; ?></p>
                     <p>N° de téléphone : <?php if ($donnees['noTelephone'] != 0) echo $donnees['noTelephone']; ?> </p>
-                    <p><input name="modification" type="submit" value="Modifier Informations"></p>
+                    <p><input class="w3-button" name="modification" type="submit" value="Modifier informations"></p>
                     <?php
                 }
                 ?>
@@ -210,7 +209,7 @@ include_once("../StructurePage/menu.php");
                     header("Location: ../");
                 } ?>
                 <br>
-                <p><input name="suppression" type="submit" value="Supprimer le compte"></p>
+                <p><input class="w3-button" name="suppression" type="submit" value="Supprimer le compte"></p>
             </form>
 
         </div>

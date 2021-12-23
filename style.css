@@ -1136,8 +1136,10 @@ a {
     }
 }
 
+
 /* Classe d'animation rajoutée pour secouer le caddie quand l'utilisateur ajoute ou retire un élément du panier
    Est appelée dès que l'on rafraichit la page car nous n'avons pas trouvé comment faire autrement */
+
 .w3-shake {
     animation: w3-shake 0.2s linear
 }

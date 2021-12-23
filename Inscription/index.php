@@ -15,11 +15,11 @@ include_once("../StructurePage/menu.php");
     <div id="page" class="container">
         <div class="boxA">
             <h2>Inscription<br /></h2>
-            <p>Les champs comportant le symbole <em>*</em> sont <strong>obligatoire</strong>.</p>
+            <p>Les champs comportant le symbole <em>*</em> sont <strong>obligatoires.</strong></p>
         </div>
         <form method="post" action="#">
             <fieldset>
-                <legend>Information du compte</legend>
+                <legend>Informations du compte</legend>
                 <?php
                 if (isset($_POST["submit"])) {
 
@@ -27,16 +27,16 @@ include_once("../StructurePage/menu.php");
                     $nom = "null";
                     $prenom = "null";
                     $adresse = "null";
-                    $postal = 0;
+                    $cp = 0;
                     $ville = "null";
                     $telephone = 0;
 
                     $results = $bdd->prepare('SELECT * FROM Utilisateur where login = :mailVerification');
-                    $mailVerification = $_POST['email'];
+                    $mailVerification = $_POST['mail'];
                     $results->bindParam(':mailVerification', $mailVerification);
                     $results->execute();
 
-                    //On vérifie que l'email entré n'est pas celui d'un autre utilisateur déjà inscrit
+                    //On vérifie que le mail entré n'est pas celui d'un autre utilisateur déjà inscrit
                     if ($donnees = $results->fetch()) {
                 ?>
                         <em> L'adresse mail : <?= $donnees['login']; ?> est déjà utilisée</em>
@@ -44,10 +44,9 @@ include_once("../StructurePage/menu.php");
                         <?php
                     } //Le mail n'est pas utilisé par quelqu'un d'autre
                     else {
-
-                        //On vérifie que le mot de passe fait moins de 16 caractère
-                        if (strlen($_POST["mdp"]) <= 16) {
-                            $email = $_POST["email"];
+                        //On vérifie que le mot de passe fait moins de 20 caractères
+                        if (strlen($_POST["mdp"]) <= 20) {
+                            $mail = $_POST["mail"];
                             $mdp = $_POST["mdp"];
                             $sexe = $_POST["sexe"];
 
@@ -61,8 +60,8 @@ include_once("../StructurePage/menu.php");
                             if (!empty($_POST["adresse"])) {
                                 $adresse = $_POST["adresse"];
                             }
-                            if (!empty($_POST["postal"])) {
-                                $postal = $_POST["postal"];
+                            if (!empty($_POST["cp"])) {
+                                $cp = $_POST["cp"];
                             }
                             if (!empty($_POST["ville"])) {
                                 $ville = $_POST["ville"];
@@ -72,44 +71,44 @@ include_once("../StructurePage/menu.php");
                             }
 
                             //On insère tous les champs dans la base de données
-                            $stmt = $bdd->prepare("INSERT INTO Utilisateur (nom, prenom, login, mdp, sexe, adresse, postal, ville, noTelephone) VALUES (:nom, :prenom, :login, SHA1(:mdp), :sexe, :adresse, :postal, :ville, :noTelephone)");
+                            $stmt = $bdd->prepare("INSERT INTO Utilisateur (nom, prenom, login, mdp, sexe, adresse, postal, ville, noTelephone) VALUES (:nom, :prenom, :login, SHA1(:mdp), :sexe, :adresse, :cp, :ville, :noTelephone)");
                             $stmt->bindParam(':nom', $nom);
                             $stmt->bindParam(':prenom', $prenom);
-                            $stmt->bindParam(':login', $email);
+                            $stmt->bindParam(':login', $mail);
                             $stmt->bindParam(':mdp', $mdp);
                             $stmt->bindParam(':sexe', $sexe);
                             $stmt->bindParam(':adresse', $adresse);
-                            $stmt->bindParam(':postal', $postal);
+                            $stmt->bindParam(':cp', $cp);
                             $stmt->bindParam(':ville', $ville);
                             $stmt->bindParam(':noTelephone', $telephone);
                             $stmt->execute();
 
-                            $_SESSION['login'] = $email;
+                            $_SESSION['login'] = $mail;
                             include_once "../StructurePage/recupDonneesPanier.php";
 
                             if (isset($_SESSION['login'])) {
                                 header("Location: ../");
                             }
-                        } //Le mot de passe fait plus de 16 caractères
+                        } //Le mot de passe fait plus de 20 caractères
                         else {
-                        ?> <em>Le mot de passe doit contenir moins de 16 caractères<br><br></em><?php
+                        ?> <em>Le mot de passe doit contenir moins de 20 caractères<br><br></em><?php
                                                                                             }
                                                                                         }
                                                                                     }
                                                                                                 ?>
 
-                <label for="email">Email <em>*</em></label>
-                <!--L'email doit correspondre à l'expression régulière donnée-->
-                <input name="email" type="email" placeholder="Email" required="" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"><br>
+                <label for="mail">Mail <em>*</em></label>
+                <!--L'mail doit correspondre à l'expression régulière donnée-->
+                <input name="mail" type="mail" placeholder="Mail" required="" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"><br>
                 <label for="mdp">Mot de passe <em>*</em></label>
-                <input name="mdp" type="password" required=""><br>
+                <input name="mdp" type="password" placeholder="**********" required=""><br>
             </fieldset>
             <fieldset>
-                <legend>Information personnelles</legend>
+                <legend>Informations personnelles</legend>
                 <label for="nom">Nom</label>
                 <input name="nom" placeholder="Nom"><br>
-                <label for="prenom">Prenom</label>
-                <input name="prenom" placeholder="Prenom"><br>
+                <label for="prenom">Prénom</label>
+                <input name="prenom" placeholder="Prénom"><br>
                 <label for="sexe">Sexe</label>
                 <select name="sexe">
                     <option value="N" name="aucun">Non renseigné</option>
@@ -120,16 +119,16 @@ include_once("../StructurePage/menu.php");
                 <input name="naissance" type="date"><br>
                 <label for="adresse">Adresse</label>
                 <input name="adresse"><br>
-                <label for="postal">Code postal</label>
+                <label for="cp">Code postal</label>
                 <!--Le code postal doit correspondre à l'expression régulière donnée-->
-                <input name="postal" pattern="[0-9]{5}"><br>
+                <input name="cp" pattern="[0-9]{5}"><br>
                 <label for="ville">Ville</label>
                 <input name="ville"><br>
                 <label for="telephone">Téléphone</label>
                 <!--Le numéro de téléphone doit correspondre à l'expression régulière donnée-->
-                <input name="telephone" type="tel" placeholder="0xxxxxxxxx" pattern="0[3, 6, 9, 7, 2][0-9]{8}"><br>
+                <input name="telephone" type="tel" placeholder="**********" pattern="0[3, 6, 9, 7, 2][0-9]{8}"><br>
             </fieldset>
-            <p><input name="submit" type="submit" value="Créer le compte"></p>
+            <p><input class="w3-button" name="submit" type="submit" value="Créer le compte"></p>
         </form>
     </div>
 </div>

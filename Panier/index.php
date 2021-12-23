@@ -20,10 +20,10 @@ include_once("../fonctionsJS/fonctionsPanier.php");
             $panier->execute();
             while ($cocktail = $panier->fetch()) {
                 $nomCocktail = str_replace("'", "\'", $cocktail['nomRecette']);
-                $nomBis = str_replace("\'", "-_-",$nomCocktail);
+                $nomBis = str_replace("\'", "-_-", $nomCocktail);
                 echo "<li><a href='../VisualisationRecette/index.php?cocktail=" . $nomBis . "'>" . $cocktail['nomRecette'] . "</a> <img class='croix' src='../Ressources/erreur.png' alt='Croix retirant le cocktail du pannier' onclick=\"suppRecette('" . $_SESSION['login'] . "','" . $nomCocktail . "')\"> </li>";
             }
-        } else {//Si l'utilisateur n'est pas connecté
+        } else { //Si l'utilisateur n'est pas connecté
             //Si l'utilisateur à déjà des cocktails dans le panier
             if (isset($_SESSION['panier'])) {
                 //On parcourt les recettes enregistrées dans le panier dans les cookies
@@ -31,7 +31,7 @@ include_once("../fonctionsJS/fonctionsPanier.php");
                     //Si le cocktail n'a pas été enlevé du panier par l'utilisateur on l'affiche
                     if ($valeur) {
                         $nomCocktail = str_replace("'", "\'", $cocktail);
-                        $nomBis = str_replace("\'", "-_-",$nomCocktail);
+                        $nomBis = str_replace("\'", "-_-", $nomCocktail);
                         echo "<li><a href='../VisualisationRecette/index.php?cocktail=" . $nomBis . "'>" . $cocktail . "</a> <img class=\"croix\" src=\"../Ressources/erreur.png\" alt=\"Croix retirant le cocktail du pannier\" onclick=\"suppCookie('" . $nomCocktail . "')\"> </li>";
                     }
                 }
@@ -42,8 +42,6 @@ include_once("../fonctionsJS/fonctionsPanier.php");
         ?>
     </ul>
 </div>
-
-
 
 <?php
 //On fait apparaître la structure du bas de la page
