@@ -124,19 +124,19 @@ include_once("../StructurePage/menu.php");
                     // On remplit les champs du formulaire avec les informations contenues dans la base de données.
                     //Si il n'y à rien dans la base de données, on remplit le placeholder.
                     ?>
-                    <input name="email" type="email" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"
+                    <input class="w3-input" name="email" type="email" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"
                            value=<?= $donnees['login'] ?>><br><br>
                     <?php if ($donnees['nom'] != "null") {
                         $nom = htmlspecialchars($donnees['nom'], ENT_QUOTES); ?>
-                        <input name="nom" value='<?= $nom ?>'><br><br>
+                        <input class="w3-input" name="nom" value='<?= $nom ?>'><br><br>
                     <?php } else { ?>
-                        <input name="nom" placeholder="Nouveau nom"><br><br>
+                        <input class="w3-input" name="nom" placeholder="Nouveau nom"><br><br>
                     <?php }
                     if ($donnees['prenom'] != "null") {
                         $prenom = htmlspecialchars($donnees['prenom'], ENT_QUOTES); ?>
-                        <input name="prenom" value='<?= $prenom ?>'><br><br>
+                        <input class="w3-input" name="prenom" value='<?= $prenom ?>'><br><br>
                     <?php } else { ?>
-                        <input name="prenom" placeholder="Nouveau prénom"><br><br>
+                        <input class="w3-input" name="prenom" placeholder="Nouveau prénom"><br><br>
                     <?php } ?>
                     <select name="sexe">
                         <option value="default" name="bdd"><?= $donnees['sexe'] ?></option>
@@ -147,35 +147,35 @@ include_once("../StructurePage/menu.php");
                     <?php
                     if ($donnees['adresse'] != "null") {
                         $adresse = htmlspecialchars($donnees['adresse'], ENT_QUOTES); ?>
-                        <input name="adresse" value='<?= $adresse ?>'><br><br>
+                        <input class="w3-input" name="adresse" value='<?= $adresse ?>'><br><br>
                     <?php } else { ?>
-                        <input name="adresse" placeholder="Nouvelle adresse"><br><br>
+                        <input class="w3-input" name="adresse" placeholder="Nouvelle adresse"><br><br>
                     <?php }
                     if ($donnees['postal'] != 0) { ?>
-                        <input name="postal" pattern="[0-9]{5}" value=<?= $donnees['postal'] ?>><br><br>
+                        <input class="w3-input" name="postal" pattern="[0-9]{5}" value=<?= $donnees['postal'] ?>><br><br>
                     <?php } else { ?>
-                        <input name="postal" placeholder="Nouveau code postal" pattern="[0-9]{5}"><br><br>
+                        <input class="w3-input" name="postal" placeholder="Nouveau code postal" pattern="[0-9]{5}"><br><br>
                     <?php }
                     if ($donnees['ville'] != "null") {
                         $ville = htmlspecialchars($donnees['ville'], ENT_QUOTES); ?>
-                        <input name="ville" value='<?= $ville ?>'><br><br>
+                        <input class="w3-input" name="ville" value='<?= $ville ?>'><br><br>
                     <?php } else { ?>
-                        <input name="ville" placeholder="Nouvelle ville"><br><br>
+                        <input class="w3-input" name="ville" placeholder="Nouvelle ville"><br><br>
                     <?php }
                     if ($donnees['noTelephone'] != 0) { ?>
-                        <input name="telephone" type="tel" pattern="0[3, 6, 9, 7, 2, 1][0-9]{8}"
+                        <input class="w3-input" name="telephone" type="tel" pattern="0[3, 6, 9, 7, 2, 1][0-9]{8}"
                                value=<?= $donnees['noTelephone'] ?>><br><br>
                     <?php } else { ?>
-                        <input name="telephone" type="tel" placeholder="0142928100" pattern="0[3, 6, 9, 7, 2][0-9]{8}">
+                        <input class="w3-input" name="telephone" type="tel" placeholder="0142928100" pattern="0[3, 6, 9, 7, 2][0-9]{8}">
                         <br><br>
                     <?php } ?>
                     <br>
-                    <input name="oldMdp" type="password" placeholder="Ancien mot de passe"><br><br>
-                    <input name="newMdp" type="password" placeholder="Nouveau mot de passe"><br><br>
-                    <input name="confirmationMdp" type="password" placeholder="Nouveau mot de passe">
+                    <input class="w3-input" name="oldMdp" type="password" placeholder="Ancien mot de passe"><br><br>
+                    <input class="w3-input" name="newMdp" type="password" placeholder="Nouveau mot de passe"><br><br>
+                    <input class="w3-input" name="confirmationMdp" type="password" placeholder="Nouveau mot de passe">
                     <br><br>
                     <br>
-                    <p><input class="w3-button" name="validation" type="submit" value="Enregistrer"></p>
+                    <p><input class="w3-btn w3-black" name="validation" type="submit" value="Enregistrer"></p>
                 <?php } else {
                     // On affiche les informations du compte de l'utilisateur
                     ?>
@@ -187,7 +187,7 @@ include_once("../StructurePage/menu.php");
                         if ($donnees['postal'] != 0) echo ' ' . $donnees['postal'];
                         if ($donnees['ville'] != "null") echo ' ' . $donnees['ville']; ?></p>
                     <p>N° de téléphone : <?php if ($donnees['noTelephone'] != 0) echo $donnees['noTelephone']; ?> </p>
-                    <p><input class="w3-button" name="modification" type="submit" value="Modifier informations"></p>
+                    <p><input class="w3-btn w3-black" name="modification" type="submit" value="Modifier informations"></p>
                     <?php
                 }
                 ?>
@@ -195,7 +195,7 @@ include_once("../StructurePage/menu.php");
             </form>
         </div>
         <div>
-            <form action="#" method="post">
+            <form class="w3-container" action="#" method="post">
                 <?php if (isset($_POST["suppression"])) {
                     // On supprime l'utilisateur de la base de données si le bouton de suppression a été pressé
                     $requete = $bdd->prepare("DELETE FROM Utilisateur WHERE login = :login");
@@ -208,7 +208,7 @@ include_once("../StructurePage/menu.php");
                     header("Location: ../");
                 } ?>
                 <br>
-                <p><input class="w3-button" name="suppression" type="submit" value="Supprimer le compte"></p>
+                <p><input class="w3-btn w3-black" name="suppression" type="submit" value="Supprimer le compte"></p>
             </form>
 
         </div>

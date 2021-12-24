@@ -7,36 +7,34 @@
         const listeSuggestions = document.getElementById("suggestion");
         if (str == "") {
             var options = select.getElementsByTagName('option');
-            for(var i = 0; i < options.length; ){
+            for (var i = 0; i < options.length;) {
                 listeSuggestions.removeChild(options[i]);
             }
             return;
-        }
-        else {
+        } else {
             if (window.XMLHttpRequest) {
                 // requête pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp = new XMLHttpRequest();
-            }
-            else {
+            } else {
                 // requête pour les navigateurs IE6, IE5
                 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
             xmlhttp.onreadystatechange = function() {
-                var listeOptions='';
+                var listeOptions = '';
                 var listeRecue = this.responseText.split("\n");
-                for (var i=0; i < listeRecue.length;++i){
-                    listeOptions += "<option value=\""+listeRecue[i]+"\" />\n"; // Stockage des options dans une variable
+                for (var i = 0; i < listeRecue.length; ++i) {
+                    listeOptions += "<option value=\"" + listeRecue[i] + "\" />\n"; // Stockage des options dans une variable
                 }
                 listeSuggestions.innerHTML = listeOptions;
             };
-            xmlhttp.open("GET","getIngredients.php?ing="+str,true);
+            xmlhttp.open("GET", "getIngredients.php?ing=" + str, true);
             xmlhttp.send();
 
         }
     }
 
     //Fonction qui supprime un ingredient des ingrédients demandés ainsi que son bouton
-    function supprIngredientDemande(str){
+    function supprIngredientDemande(str) {
         ingredientsAjoutes.splice(ingredientsAjoutes.indexOf(str), 1);
         afficheRecette("");
         var bouton = document.getElementById(str);
@@ -44,7 +42,7 @@
     }
 
     //Fonction qui supprime un ingredient des ingrédients enlevés ainsi que son bouton
-    function supprIngredientEnleve(str){
+    function supprIngredientEnleve(str) {
         ingredientsEnleves.splice(ingredientsEnleves.indexOf(str), 1);
         afficheRecette("");
         var bouton = document.getElementById(str);
@@ -53,7 +51,7 @@
 
     //Focntion qui ajoute un ingrédient aux ingrédients demandés ainsi que son bouton
     function ajoutIngredientDemande(str) {
-        if(ingredientsAjoutes.indexOf(str) == -1) {
+        if (ingredientsAjoutes.indexOf(str) == -1) {
             /*Ajout de l'ingrédient aux ingrédients non demandés*/
             ingredientsAjoutes.push(str);
 
@@ -61,9 +59,10 @@
             var formulaire = document.getElementById('boutonsAjouts');
             var bouton = document.createElement("BUTTON");
             bouton.setAttribute("id", str);
+            bouton.setAttribute("class", "w3-button w3-black");
 
             bouton.setAttribute("onclick", "supprIngredientDemande(this.id)");
-            bouton.innerHTML = "<span>"+str+"</span>";
+            bouton.innerHTML = "<span>" + str + "</span>";
             formulaire.insertBefore(bouton, null);
         }
     }
@@ -71,7 +70,7 @@
     //Focntion qui ajoute un ingrédient aux ingrédients enlevés ainsi que son bouton
     function ajoutIngredientEnleve(str) {
         /*Ajout de l'ingrédient aux ingrédients non demandés*/
-        if(ingredientsEnleves.indexOf(str) == -1) {
+        if (ingredientsEnleves.indexOf(str) == -1) {
             ingredientsEnleves.push(str);
 
             /*Création du bouton*/
@@ -79,8 +78,9 @@
             var bouton = document.createElement("BUTTON");
 
             bouton.setAttribute("id", str);
+            bouton.setAttribute("class", "w3-button w3-black");
             bouton.setAttribute("onclick", "supprIngredientEnleve(this.id)");
-            bouton.innerHTML = "<span>"+str+"</span>";
+            bouton.innerHTML = "<span>" + str + "</span>";
 
             formulaire.insertBefore(bouton, null);
         }
@@ -136,7 +136,7 @@
         }
         var div2 = document.createElement("div");
 
-        xmlhttp.onreadystatechange = function () {
+        xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4) {
                 var listeCocktails = this.responseText.split("-_-");
                 div2.innerHTML = htmlAffichageCocktails(listeCocktails);
@@ -159,10 +159,10 @@
     }
 
     //Retourne le code HTML de l'affichage des cocktails (titre cliquable)
-    function htmlAffichageCocktails(liste){
+    function htmlAffichageCocktails(liste) {
         var strP = "<br><br>";
         var nomCocktail;
-        for(var j=0; j<liste.length-1; j++) {
+        for (var j = 0; j < liste.length - 1; j++) {
             nomCocktail = liste[j].replace("'", "-_-");
             strP += "<a href='../VisualisationRecette/index.php?cocktail=" + nomCocktail + "'><h3>" + liste[j] + "</h3></a><br>";
         }

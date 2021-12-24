@@ -17,7 +17,7 @@ include_once("../StructurePage/menu.php");
             <h2>Inscription<br /></h2>
             <p>Les champs comportant le symbole <em>*</em> sont <strong>obligatoires.</strong></p>
         </div>
-        <form method="post" action="#">
+        <form class="w3-container" method="post" action="#">
             <fieldset>
                 <legend>Informations du compte</legend>
                 <?php
@@ -98,17 +98,17 @@ include_once("../StructurePage/menu.php");
                                                                                                 ?>
 
                 <label for="mail">Mail <em>*</em></label>
-                <!--L'mail doit correspondre à l'expression régulière donnée-->
-                <input name="mail" type="mail" placeholder="Mail" required="" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"><br>
+                <!--Le mail doit correspondre à l'expression régulière donnée-->
+                <input class="w3-input" name="mail" type="mail" placeholder="Mail" required="" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"><br>
                 <label for="mdp">Mot de passe <em>*</em></label>
-                <input name="mdp" type="password" placeholder="Mot de passe" required=""><br>
+                <input class="w3-input" name="mdp" type="password" placeholder="Mot de passe" required=""><br>
             </fieldset>
             <fieldset>
                 <legend>Informations personnelles</legend>
                 <label for="nom">Nom</label>
-                <input name="nom" placeholder="Nom"><br>
+                <input class="w3-input" name="nom" placeholder="Nom"><br>
                 <label for="prenom">Prénom</label>
-                <input name="prenom" placeholder="Prénom"><br>
+                <input class="w3-input" name="prenom" placeholder="Prénom"><br>
                 <label for="sexe">Sexe</label>
                 <select name="sexe">
                     <option value="N" name="aucun">Non renseigné</option>
@@ -116,19 +116,19 @@ include_once("../StructurePage/menu.php");
                     <option value="F" name="femme">Femme</option>
                 </select><br>
                 <label for="naissance">Date de naissance</label>
-                <input name="naissance" type="date"><br>
+                <input class="w3-input" name="naissance" type="date"><br>
                 <label for="adresse">Adresse</label>
-                <input name="adresse"><br>
+                <input class="w3-input" name="adresse"><br>
                 <label for="cp">Code postal</label>
                 <!--Le code postal doit correspondre à l'expression régulière donnée-->
-                <input name="cp" pattern="[0-9]{5}"><br>
+                <input class="w3-input" name="cp" pattern="[0-9]{5}"><br>
                 <label for="ville">Ville</label>
-                <input name="ville"><br>
+                <input class="w3-input" name="ville"><br>
                 <label for="telephone">Téléphone</label>
                 <!--Le numéro de téléphone doit correspondre à l'expression régulière donnée-->
-                <input name="telephone" type="tel" placeholder="0142928100" pattern="0[3, 6, 9, 7, 2][0-9]{8}"><br>
+                <input class="w3-input" name="telephone" type="tel" placeholder="0142928100" pattern="0[3, 6, 9, 7, 2][0-9]{8}"><br>
             </fieldset>
-            <p><input class="w3-button" name="submit" type="submit" value="Créer le compte"></p>
+            <p><input class="w3-btn w3-black" name="submit" type="submit" value="Créer le compte"></p>
         </form>
     </div>
 </div>

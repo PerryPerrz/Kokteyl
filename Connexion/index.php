@@ -64,7 +64,7 @@ include_once("../StructurePage/menu.php");
                     ?>
 
                 </fieldset>
-                <p><input class="w3-btn" name="submit" type="submit" value="Connexion"></p>
+                <p><input class="w3-btn w3-black" name="submit" type="submit" value="Connexion"></p>
             </form>
         </div>
         <div>
