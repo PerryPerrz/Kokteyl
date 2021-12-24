@@ -1,6 +1,6 @@
 <?php
 //On ouvre la bdd.
-include("../OuvertureBDD/index.php");
+include("../OuvertureBDD/ouvertureBDD.php");
 //On crée une session ou récupère celle en cours (gestion des cookies de session).
 session_start();
 //On fait apparaître la structure du haut de la page
@@ -17,7 +17,7 @@ include_once("../StructurePage/menu.php");
         //La donnée est rentrée par l'utilisateur lors de la modification des données de son compte.
         function changerDonnee($donnees, $str_donnee_form, $str_donnee_bdd) {
             //On ouvre la bdd et on ouvre la session car la fonction n'est pas appelée au chargement de la page mais quand l'utilisateur appuie sur le bouton enregistrer.
-            include ("../OuvertureBDD/index.php");
+            include("../OuvertureBDD/ouvertureBDD.php");
             session_start();
 
             // On vérifie que la donnée entrée n'est ni vide, ni la même que celle contenue dans la base de données.
@@ -205,7 +205,12 @@ include_once("../StructurePage/menu.php");
                     $_SESSION = array();
                     session_destroy();
                     unset($_SESSION);
-                    header("Location: ../");
+                    //On revient à l'accueil
+                    ?>
+                    <script>
+                        document.location.replace("../");
+                    </script>
+                    <?php
                 } ?>
                 <br>
                 <p><input class="w3-btn w3-black" name="suppression" type="submit" value="Supprimer le compte"></p>

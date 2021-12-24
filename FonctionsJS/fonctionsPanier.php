@@ -2,18 +2,18 @@
 <script>
     var cheminDossier = "";
     <?php
-    if (file_exists("../OuvertureBDD/index.php")) {
+    if (file_exists("../OuvertureBDD/ouvertureBDD.php")) {
     ?>
         cheminDossier = "../FonctionsJS/"
     <?php
-    } else if (file_exists("OuvertureBDD/index.php")) {
+    } else if (file_exists("OuvertureBDD/ouvertureBDD.php")) {
     ?>
         cheminDossier = "FonctionsJS/"
     <?php
     }
     ?>
     //Fonction permettant d'ajouter une recette au panier quand l'utilisateur est connecté
-    function ajoutRecette(user, recette) {
+    function ajoutCocktail(user, recette) {
         if (window.XMLHttpRequest) {
             // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -29,12 +29,12 @@
                 document.location.reload();
             }
         };
-        xmlhttp.open("GET", cheminDossier + "addCocktail.php?p=" + str, true);
+        xmlhttp.open("GET", cheminDossier + "ajoutCocktail.php?p=" + str, true);
         xmlhttp.send();
     }
 
     //Fonction permettant de supprimer une recette du panier quand l'utilisateur est connecté
-    function suppRecette(user, recette) {
+    function enleveCocktail(user, recette) {
         if (window.XMLHttpRequest) {
             // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -50,12 +50,12 @@
                 document.location.reload();
             }
         };
-        xmlhttp.open("GET", cheminDossier + "suppCocktail.php?p=" + str, false);
+        xmlhttp.open("GET", cheminDossier + "enleveCocktail.php?p=" + str, false);
         xmlhttp.send();
     }
 
     //Fonction permettant d'ajouter une recette au panier quand l'utilisateur n'est pas connecté
-    function addCookie(recette) {
+    function ajoutCookie(recette) {
         if (window.XMLHttpRequest) {
             // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -71,13 +71,13 @@
                 document.location.reload();
             }
         };
-        xmlhttp.open("GET", cheminDossier + "addCookie.php?p=" + recette, true);
+        xmlhttp.open("GET", cheminDossier + "ajoutCookie.php?p=" + recette, true);
         xmlhttp.send();
     }
 
 
     //Fonction permettant de supprimer une recette du panier quand l'utilisateur n'est pas connecté
-    function suppCookie(recette) {
+    function enleveCookie(recette) {
         if (window.XMLHttpRequest) {
             // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -93,12 +93,12 @@
                 document.location.reload(); //Refresh les élements de la page sans bouger l'utilisateur.
             }
         };
-        xmlhttp.open("GET", cheminDossier + "suppCookie.php?p=" + recette, true);
+        xmlhttp.open("GET", cheminDossier + "enleveCookie.php?p=" + recette, true);
         xmlhttp.send();
     }
 
     //Fonction qui change la catégorie courante par celle donnée en paramètre et enregistre le chemin parcourue jusque celle ci dans $_SESSION
-    function sousCat(superCat) {
+    function sousFiltre(superCat) {
 
         if (window.XMLHttpRequest) {
             // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
@@ -115,11 +115,11 @@
                 document.location.href = "./"; //Refresh + remet au début d'une page.
             }
         };
-        xmlhttp.open("GET", cheminDossier + "sousCat.php?p=" + superCat, true);
+        xmlhttp.open("GET", cheminDossier + "sousFiltre.php?p=" + superCat, true);
         xmlhttp.send();
     }
 
-    function backLead(categorie) {
+    function retourArriereFiltre(categorie) {
 
         if (window.XMLHttpRequest) {
             // code pour les navigateurs IE7+, Firefox, Chrome, Opera, Safari
@@ -136,7 +136,7 @@
                 document.location.href = "./";
             }
         };
-        xmlhttp.open("GET", cheminDossier + "backLead.php?p=" + categorie, true);
+        xmlhttp.open("GET", cheminDossier + "retourArriereFiltre.php?p=" + categorie, true);
         xmlhttp.send();
     }
 
@@ -163,25 +163,13 @@
 </script>
 
 <?php
-function connexion()
-{
-    try {
-        // On se connecte à MySQL
-        $bdd = new PDO('mysql:host=localhost;dbname=Kokteyl;charset=utf8', 'root', '');
-        return $bdd;
-    } catch (Exception $e) {
-        // En cas d'erreur, on affiche un message et on arrête tout
-        die('Erreur : ' . $e->getMessage());
-    }
-}
-
 function sousCategorie($categorie): string
 {
     if (!str_contains($categorie, "\'")) {
         $nomBis = str_replace("'", "\'", $categorie);
     }
     $sql = "SELECT nom FROM SuperCategorie WHERE nomSuper = '" . $nomBis . "'";
-    $bdd = connexion();
+    include("../OuvertureBDD/ouvertureBDD.php");
     $req = $bdd->query($sql);
     while ($donnees = $req->fetch()) {
         if (!str_contains($donnees['nom'], "\'")) {

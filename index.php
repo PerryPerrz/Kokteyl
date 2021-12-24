@@ -1,6 +1,6 @@
 <?php
 //On ouvre la bdd.
-include_once("OuvertureBDD/index.php");
+include_once("OuvertureBDD/ouvertureBDD.php");
 include_once("StructurePage/nbCocktailsPanier.php");
 //On crée une session ou récupère celle en cours (gestion des cookies de session).
 session_start();

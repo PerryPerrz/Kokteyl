@@ -29,7 +29,7 @@ function afficherCocktails(bool|array $cocktails, int $i, string $cheminImage): 
 
                     $estDansPanier = false;
                     //On parcours le panier de l'utilisateur pour savoir si le cocktail est dedans
-                    include("OuvertureBDD/index.php");
+                    include("OuvertureBDD/ouvertureBDD.php");
                     $panier = $bdd->prepare("SELECT nomRecette FROM Panier WHERE utilisateur = :utilisateur");
                     $panier->bindParam(":utilisateur", $_SESSION['login']);
                     $panier->execute();
@@ -41,9 +41,9 @@ function afficherCocktails(bool|array $cocktails, int $i, string $cheminImage): 
                     $nomCocktail = str_replace("'", "\'", $nomCocktail);
                     //Si le cocktail est dans le panier on propose de le supprimer et inversement sinon
                     if ($estDansPanier) {
-                        echo "suppRecette('" . $_SESSION['login'] . "','" . $nomCocktail . "')";
+                        echo "enleveCocktail('" . $_SESSION['login'] . "','" . $nomCocktail . "')";
                     } else {
-                        echo "ajoutRecette('" . $_SESSION['login'] . "','" . $nomCocktail . "')";
+                        echo "ajoutCocktail('" . $_SESSION['login'] . "','" . $nomCocktail . "')";
                     }
                 } else { //Si l'utilisateur n'est pas connecté
                     //Si l'utilisateur à déjà ajouté ou supprimé le cocktail au panier
@@ -51,14 +51,14 @@ function afficherCocktails(bool|array $cocktails, int $i, string $cheminImage): 
                         //Si il est actuellement ajouté au panier on le supprime lors d'un click sur l'image
                         if ($_SESSION['panier'][$nomCocktail]) {
                             $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                            echo "suppCookie('" . $nomCocktail . "')";
+                            echo "enleveCookie('" . $nomCocktail . "')";
                         } else { //Si il n'est pas dans le panier on l'ajoute lors d'un click sur l'image
                             $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                            echo "addCookie('" . $nomCocktail . "')";
+                            echo "ajoutCookie('" . $nomCocktail . "')";
                         }
                     } else { //Sinon, on ajoute le cocktail au panier lors d'un click sur l'image
                         $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                        echo "addCookie('" . $nomCocktail . "')";
+                        echo "ajoutCookie('" . $nomCocktail . "')";
                     }
                 }
                 $nomBis = str_replace("'", "-_-", $cocktails[$i]['nom']);

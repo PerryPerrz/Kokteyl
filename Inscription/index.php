@@ -1,6 +1,6 @@
 <?php
 //On ouvre la bdd.
-include("../OuvertureBDD/index.php");
+include("../OuvertureBDD/ouvertureBDD.php");
 //On crée une session ou récupère celle en cours (gestion des cookies de session).
 session_start();
 //On fait apparaître la structure du haut de la page
@@ -87,7 +87,12 @@ include_once("../StructurePage/menu.php");
                             include_once "../StructurePage/recupDonneesPanier.php";
 
                             if (isset($_SESSION['login'])) {
-                                header("Location: ../");
+                                //On revient à l'accueil
+                                ?>
+                                <script>
+                                    document.location.replace("../");
+                                </script>
+                                <?php
                             }
                         } //Le mot de passe fait plus de 20 caractères
                         else {
@@ -118,12 +123,12 @@ include_once("../StructurePage/menu.php");
                 <label for="naissance">Date de naissance</label>
                 <input class="w3-input" name="naissance" type="date"><br>
                 <label for="adresse">Adresse</label>
-                <input class="w3-input" name="adresse"><br>
+                <input class="w3-input" name="adresse" placeholder="Adresse"><br>
                 <label for="cp">Code postal</label>
                 <!--Le code postal doit correspondre à l'expression régulière donnée-->
-                <input class="w3-input" name="cp" pattern="[0-9]{5}"><br>
+                <input class="w3-input" name="cp" pattern="[0-9]{5}" placeholder="54000"><br>
                 <label for="ville">Ville</label>
-                <input class="w3-input" name="ville"><br>
+                <input class="w3-input" name="ville"placeholder="Nancy"><br>
                 <label for="telephone">Téléphone</label>
                 <!--Le numéro de téléphone doit correspondre à l'expression régulière donnée-->
                 <input class="w3-input" name="telephone" type="tel" placeholder="0142928100" pattern="0[3, 6, 9, 7, 2][0-9]{8}"><br>

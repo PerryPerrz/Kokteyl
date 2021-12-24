@@ -1,5 +1,5 @@
 <?php
-include_once("../OuvertureBDD/index.php");
+include_once("../OuvertureBDD/ouvertureBDD.php");
 session_start();
 
 //On ajoute les cocktails déjà sélectionnés hors connexion

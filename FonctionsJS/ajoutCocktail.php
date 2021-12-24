@@ -1,6 +1,6 @@
 <?php
 /*Ajout du cocktail envoyé dans les paramètres de la page dans la panier de l'utilisateur connecté, action effectuée sur la base de données*/
-include("../OuvertureBDD/index.php");
+include("../OuvertureBDD/ouvertureBDD.php");
 
 $tabRequete = explode("|", $_GET['p']);
 $sql = "INSERT INTO Panier(utilisateur, nomRecette) VALUES (:utilisateur, :recette)";

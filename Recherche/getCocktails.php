@@ -1,6 +1,6 @@
 <?php
 //Fichier qui recherche les cocktails dans la base de données recherchés par l'utilisateur
-include("../OuvertureBDD/index.php");
+include("../OuvertureBDD/ouvertureBDD.php");
 
 $sql = "SELECT DISTINCT nomRecette FROM Liaison WHERE ";
 

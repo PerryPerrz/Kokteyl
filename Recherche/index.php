@@ -1,6 +1,6 @@
 <?php
 //On ouvre la bdd.
-include("../OuvertureBDD/index.php");
+include("../OuvertureBDD/ouvertureBDD.php");
 //On crée une session ou récupère celle en cours (gestion des cookies de session).
 session_start();
 

@@ -1,6 +1,6 @@
 <?php
 //On ouvre la bdd.
-include("../OuvertureBDD/index.php");
+include("../OuvertureBDD/ouvertureBDD.php");
 //On crée une session ou récupère celle en cours (gestion des cookies de session).
 session_start();
 //On fait apparaître la structure du haut de la page
@@ -30,7 +30,7 @@ include_once("../StructurePage/formatageString.php");
                 while ($donnees = $superCat->fetch()) {
                     $nomCat = $donnees['nom'];
                     $nomCat = str_replace("'", "\'", $nomCat);
-                    echo "<button onclick=\"sousCat('" . $nomCat . "')\">" . $donnees['nom'] . "</button>";
+                    echo "<button onclick=\"sousFiltre('" . $nomCat . "')\">" . $donnees['nom'] . "</button>";
                 }
             ?>
         </div><br>
@@ -43,7 +43,7 @@ include_once("../StructurePage/formatageString.php");
                         if ($cat != 'Aliment' && $val == 1) {
                             $cat = str_replace("'", "\'", $cat);
                             $nomAffichage = str_replace("\'", "'", $cat);
-                            echo "<button onclick=\"backLead('$cat')\">$nomAffichage</button><br><br>";
+                            echo "<button onclick=\"retourArriereFiltre('$cat')\">$nomAffichage</button><br><br>";
                         }
                     }
                 }
@@ -53,7 +53,7 @@ include_once("../StructurePage/formatageString.php");
                 while ($donnees = $superCat->fetch()) {
                     $nomCat = $donnees['nom'];
                     $nomCat = str_replace("'", "\'", $nomCat);
-                    echo "<button onclick=\"sousCat('" . $nomCat . "')\">" . $donnees['nom'] . "</button>";
+                    echo "<button onclick=\"sousFiltre('" . $nomCat . "')\">" . $donnees['nom'] . "</button>";
                 }
     ?>
     </div>

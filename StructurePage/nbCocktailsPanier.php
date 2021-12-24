@@ -2,10 +2,10 @@
 function nbCocktailsPanier(): string
 {
     //On veut ouvrir la bdd, si le fichier qui include ce fichier se trouve à la racine on include la bdd depuis la racine sinon on l'include depuis un package
-    if (file_exists("../OuvertureBDD/index.php")) {
-        include("../OuvertureBDD/index.php");
-    } else if (file_exists("OuvertureBDD/index.php")) {
-        include("OuvertureBDD/index.php");
+    if (file_exists("../OuvertureBDD/ouvertureBDD.php")) {
+        include("../OuvertureBDD/ouvertureBDD.php");
+    } else if (file_exists("OuvertureBDD/ouvertureBDD.php")) {
+        include("OuvertureBDD/ouvertureBDD.php");
     }
 
     $res = "";

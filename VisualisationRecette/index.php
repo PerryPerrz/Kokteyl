@@ -1,6 +1,6 @@
 <?php
 //On ouvre la bdd.
-include("../OuvertureBDD/index.php");
+include("../OuvertureBDD/ouvertureBDD.php");
 //On crée une session ou récupère celle en cours (gestion des cookies de session).
 session_start();
 //On fait apparaître la structure du haut de la page
@@ -47,9 +47,9 @@ if (isset($_GET['cocktail'])) {
                 $nomCocktail = str_replace("'", "\'", $nomCocktail);
                 //Si le cocktail est dans le panier on propose de le supprimer et inversement sinon
                 if ($estDansPanier) {
-                    echo "suppRecette('" . $_SESSION['login'] . "','" . $nomCocktail . "')";
+                    echo "enleveCocktail('" . $_SESSION['login'] . "','" . $nomCocktail . "')";
                 } else {
-                    echo "ajoutRecette('" . $_SESSION['login'] . "','" . $nomCocktail . "')";
+                    echo "ajoutCocktail('" . $_SESSION['login'] . "','" . $nomCocktail . "')";
                 }
             } else { //Si l'utilisateur n'est pas connecté
                 //Si l'utilisateur à déjà ajouté ou supprimé le cocktail au panier
@@ -57,14 +57,14 @@ if (isset($_GET['cocktail'])) {
                     //Si il est actuellement ajouté au panier on le supprime lors d'un click sur l'image
                     if ($_SESSION['panier'][$nomCocktail]) {
                         $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                        echo "suppCookie('" . $nomCocktail . "')";
+                        echo "enleveCookie('" . $nomCocktail . "')";
                     } else { //Si il n'est pas dans le panier on l'ajoute lors d'un click sur l'image
                         $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                        echo "addCookie('" . $nomCocktail . "')";
+                        echo "ajoutCookie('" . $nomCocktail . "')";
                     }
                 } else { //Sinon, on ajoute le cocktail au panier lors d'un click sur l'image
                     $nomCocktail = str_replace("'", "\'", $nomCocktail);
-                    echo "addCookie('" . $nomCocktail . "')";
+                    echo "ajoutCookie('" . $nomCocktail . "')";
                 }
             }
             ?>

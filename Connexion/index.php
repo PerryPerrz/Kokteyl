@@ -1,6 +1,6 @@
 <?php
 //On ouvre la bdd.
-include("../OuvertureBDD/index.php");
+include("../OuvertureBDD/ouvertureBDD.php");
 //On crée une session ou récupère celle en cours (gestion des cookies de session).
 session_start();
 //On fait apparaître la structure du haut de la page
@@ -51,7 +51,12 @@ include_once("../StructurePage/menu.php");
                                 $_SESSION['login'] = $mailVerification;
                                 include_once "../StructurePage/recupDonneesPanier.php";
 
-                                header("Location: ../");
+                                //On revient à l'accueil
+                                ?>
+                                <script>
+                                    document.location.replace("../");
+                                </script>
+                                <?php
                             } else {
                                 /*Le mot de passe ne correspond pas au mail*/
                                 echo "<p>Le mode de passe est incorrecte !</p>";
