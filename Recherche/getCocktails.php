@@ -1,4 +1,5 @@
 <?php
+//Fichier qui recherche les cocktails dans la base de données recherchés par l'utilisateur
 include("../OuvertureBDD/index.php");
 
 $sql = "SELECT DISTINCT nomRecette FROM Liaison WHERE ";
@@ -8,16 +9,9 @@ $sql .= $listeIng;
 
 $recette = $bdd->prepare($sql);
 $recette->execute();
-$ingredients = $bdd->prepare("SELECT nomIngredient FROM Liaison WHERE nomRecette = :recette");
 
 while ($donnees = $recette->fetch()) {
     echo $donnees['nomRecette']."\n";
-    $ingredients->bindParam(":recette", $donnees['nomRecette']);
-    $ingredients->execute();
-    while($ing = $ingredients->fetch()){
-        print_r($ing['nomIngredient']);
-        echo "\n";
-    }
-    echo "_";
+    echo "-_-";
 }
 $recette->closeCursor(); // Termine le traitement de la requête

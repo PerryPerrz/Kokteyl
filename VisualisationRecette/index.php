@@ -7,7 +7,7 @@ session_start();
 include_once("../StructurePage/entete.php");
 include_once("../StructurePage/menu.php");
 include_once("../StructurePage/formatageString.php");
-include_once("../fonctionsJS/fonctionsPanier.php");
+include_once("../FonctionsJS/fonctionsPanier.php");
 
 //On ne parcourt pas les élements vides de l'Array
 if (isset($_GET['cocktail'])) {

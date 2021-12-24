@@ -11,7 +11,7 @@ function afficherCocktails(bool|array $cocktails, int $i, string $cheminImage): 
         <div class="w3-quarter">
             <div class="img w3-hover-opacity">
                 <?php
-                include_once("fonctionsJS/fonctionsPanier.php");
+                include_once("FonctionsJS/fonctionsPanier.php");
 
                 //Si le cocktail à une image, on l'affiche sinon on affiche une image par défaut
                 if (file_exists($nomFinal)) {

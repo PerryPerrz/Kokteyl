@@ -6,13 +6,13 @@ session_start();
 //On fait apparaître la structure du haut de la page
 include_once("../StructurePage/entete.php");
 include_once("../StructurePage/menu.php");
-include_once("../fonctionsJS/fonctionsPanier.php");
+include_once("../FonctionsJS/fonctionsPanier.php");
 include_once("../StructurePage/formatageString.php");
 ?>
 
 <div class="w3-main w3-content w3-padding w3-center w3-animate-opacity" style="max-width:1200px;margin-top:100px">
-    <div id="staff" class="container">
-        <div class="title">
+    <div>
+        <div>
             <h2>Notre proposition de cocktails</h2>
             <span>Cliquez sur un filtre pour afficher les boissons utilisant cet ingrédient, cliquez à nouveau desssus pour l'enlever.</span>
         </div>
@@ -30,7 +30,7 @@ include_once("../StructurePage/formatageString.php");
                 while ($donnees = $superCat->fetch()) {
                     $nomCat = $donnees['nom'];
                     $nomCat = str_replace("'", "\'", $nomCat);
-                    echo "<button class='boutonCat' onclick=\"sousCat('" . $nomCat . "')\">" . $donnees['nom'] . "</button>";
+                    echo "<button onclick=\"sousCat('" . $nomCat . "')\">" . $donnees['nom'] . "</button>";
                 }
             ?>
         </div><br>
@@ -43,7 +43,7 @@ include_once("../StructurePage/formatageString.php");
                         if ($cat != 'Aliment' && $val == 1) {
                             $cat = str_replace("'", "\'", $cat);
                             $nomAffichage = str_replace("\'", "'", $cat);
-                            echo "<button class='boutonCat' onclick=\"backLead('$cat')\">$nomAffichage</button><br><br>";
+                            echo "<button onclick=\"backLead('$cat')\">$nomAffichage</button><br><br>";
                         }
                     }
                 }
@@ -53,7 +53,7 @@ include_once("../StructurePage/formatageString.php");
                 while ($donnees = $superCat->fetch()) {
                     $nomCat = $donnees['nom'];
                     $nomCat = str_replace("'", "\'", $nomCat);
-                    echo "<button class='boutonCat' onclick=\"sousCat('" . $nomCat . "')\">" . $donnees['nom'] . "</button>";
+                    echo "<button onclick=\"sousCat('" . $nomCat . "')\">" . $donnees['nom'] . "</button>";
                 }
     ?>
     </div>
@@ -109,7 +109,7 @@ include_once("../StructurePage/formatageString.php");
         <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
 
             <!-- First Photo Grid-->
-            <div class="w3-row-padding w3-padding-16 w3-center" id="drink">
+            <div class="w3-row-padding w3-padding-16 w3-center">
 
                 <?php
                     for ($i = 0; $i < $parPage / 2; ++$i) {

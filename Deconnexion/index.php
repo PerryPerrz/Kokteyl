@@ -13,8 +13,8 @@ include_once("../StructurePage/menu.php");
 ?>
 
 <div class="w3-main w3-content w3-padding w3-center" style="max-width:1200px;margin-top:100px">
-    <div id="staff" class="container">
-        <div class="title">
+    <div>
+        <div>
             <h2>Déconnexion</h2>
             <p>Vous êtes bien déconnecté. <a href="../">Cliquez-ici </a>pour revenir à la page d'accueil.</p>
         </div>
