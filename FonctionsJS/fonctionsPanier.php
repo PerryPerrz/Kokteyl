@@ -4,11 +4,11 @@
     <?php
     if (file_exists("../OuvertureBDD/index.php")) {
     ?>
-        cheminDossier = "../fonctionsJS/"
+        cheminDossier = "../FonctionsJS/"
     <?php
     } else if (file_exists("OuvertureBDD/index.php")) {
     ?>
-        cheminDossier = "fonctionsJS/"
+        cheminDossier = "FonctionsJS/"
     <?php
     }
     ?>

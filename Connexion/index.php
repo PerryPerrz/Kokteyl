@@ -17,13 +17,13 @@ include_once("../StructurePage/menu.php");
             <p>Les champs comportant le symbole <em>*</em> sont <strong>obligatoires.</strong></p>
         </div>
         <div>
-            <form method="post" action="index.php">
+            <form class="w3-container" method="post" action="index.php">
                 <fieldset>
                     <legend>Informations du compte</legend>
                     <label for="mail">Mail <em>*</em></label>
-                    <input name="mail" type="mail" placeholder="Mail" required="" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"><br>
+                    <input class="w3-input" name="mail" type="mail" placeholder="Mail" required="" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"><br>
                     <label for="mdp">Mot de passe <em>*</em></label>
-                    <input type="password" name="mdp" placeholder="Mot de passe" required=""><br>
+                    <input class="w3-input" type="password" name="mdp" placeholder="Mot de passe" required=""><br>
                     <?php
 
                     if (isset($_POST["submit"])) {
@@ -64,7 +64,7 @@ include_once("../StructurePage/menu.php");
                     ?>
 
                 </fieldset>
-                <p><input class="w3-button" name="submit" type="submit" value="Connexion"></p>
+                <p><input class="w3-btn" name="submit" type="submit" value="Connexion"></p>
             </form>
         </div>
         <div>
