@@ -21,7 +21,7 @@ include_once("../FonctionsJS/fonctionsPanier.php");
             while ($cocktail = $panier->fetch()) {
                 $nomCocktail = str_replace("'", "\'", $cocktail['nomRecette']);
                 $nomBis = str_replace("\'", "-_-", $nomCocktail);
-                echo "<li><a href='../VisualisationRecette/ouvertureBDD.php?cocktail=" . $nomBis . "'>" . $cocktail['nomRecette'] . '</a> <img class=\'croix\' src=\'../Ressources/erreur.png\' alt=\'Croix retirant le cocktail du pannier\' onclick=\"enleveCocktail(\'"' . $_SESSION['login'] . "','" . $nomCocktail . "')\"> </li>";
+                echo "<li><a href='../VisualisationRecette/index.php?cocktail=" . $nomBis . "'>" . $cocktail['nomRecette'] . "</a> <img class='croix' src='../Ressources/erreur.png' alt='Croix retirant le cocktail du panier' onclick=\"enleveCocktail('" . $_SESSION['login'] . "','" . $nomCocktail . "')\"> </li>";
             }
         } else { //Si l'utilisateur n'est pas connecté
             //Si l'utilisateur à déjà des cocktails dans le panier
@@ -32,7 +32,7 @@ include_once("../FonctionsJS/fonctionsPanier.php");
                     if ($valeur) {
                         $nomCocktail = str_replace("'", "\'", $cocktail);
                         $nomBis = str_replace("\'", "-_-", $nomCocktail);
-                        echo "<li><a href='../VisualisationRecette/ouvertureBDD.php?cocktail=" . $nomBis . "'>" . $cocktail . "</a> <img class=\"croix\" src=\"../Ressources/erreur.png\" alt=\"Croix retirant le cocktail du pannier\" onclick=\"enleveCookie('" . $nomCocktail . "')\"> </li>";
+                        echo "<li><a href='../VisualisationRecette/index.php?cocktail=" . $nomBis . "'>" . $cocktail . "</a> <img class=\"croix\" src=\"../Ressources/erreur.png\" alt=\"Croix retirant le cocktail du pannier\" onclick=\"enleveCookie('" . $nomCocktail . "')\"> </li>";
                     }
                 }
             } else {

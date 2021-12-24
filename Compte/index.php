@@ -117,7 +117,7 @@ include_once("../StructurePage/menu.php");
                     changerDonnee($donnees, 'ville', 'ville');
 
                     ?>
-                    <button name="retour" action="./">Retour</button>
+                    <button class="w3-btn w3-black" name="retour" action="./">Retour</button>
                     <?php
                     // On vérifie que l'utilisateur veuille bien modifier les informations de son compte.
                 } else if (isset($_POST["modification"])) {
@@ -139,8 +139,7 @@ include_once("../StructurePage/menu.php");
                         <input class="w3-input" name="prenom" placeholder="Nouveau prénom"><br><br>
                     <?php } ?>
                     <select name="sexe">
-                        <option value="default" name="bdd"><?= $donnees['sexe'] ?></option>
-                        <option value="Non renseigné" name="aucun">Non renseigné</option>
+                        <option value="N" name="aucun">Non renseigné</option>
                         <option value="H" name="homme">Homme</option>
                         <option value="F" name="femme">Femme</option>
                     </select><br><br>
