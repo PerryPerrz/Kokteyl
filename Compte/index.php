@@ -166,7 +166,7 @@ include_once("../StructurePage/menu.php");
                         <input name="telephone" type="tel" pattern="0[3, 6, 9, 7, 2, 1][0-9]{8}"
                                value=<?= $donnees['noTelephone'] ?>><br><br>
                     <?php } else { ?>
-                        <input name="telephone" type="tel" placeholder="**********" pattern="0[3, 6, 9, 7, 2][0-9]{8}">
+                        <input name="telephone" type="tel" placeholder="0142928100" pattern="0[3, 6, 9, 7, 2][0-9]{8}">
                         <br><br>
                     <?php } ?>
                     <br>

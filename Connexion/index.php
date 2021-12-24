@@ -23,7 +23,7 @@ include_once("../StructurePage/menu.php");
                     <label for="mail">Mail <em>*</em></label>
                     <input name="mail" type="mail" placeholder="Mail" required="" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"><br>
                     <label for="mdp">Mot de passe <em>*</em></label>
-                    <input type="password" name="mdp" placeholder="**********" required=""><br>
+                    <input type="password" name="mdp" placeholder="Mot de passe" required=""><br>
                     <?php
 
                     if (isset($_POST["submit"])) {

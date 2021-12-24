@@ -101,7 +101,7 @@ include_once("../StructurePage/menu.php");
                 <!--L'mail doit correspondre à l'expression régulière donnée-->
                 <input name="mail" type="mail" placeholder="Mail" required="" pattern="[aA0-zZ9]+[.]?[aA0-zZ9]*@[aA-zZ]*[.]{1}[aA-zZ]+"><br>
                 <label for="mdp">Mot de passe <em>*</em></label>
-                <input name="mdp" type="password" placeholder="**********" required=""><br>
+                <input name="mdp" type="password" placeholder="Mot de passe" required=""><br>
             </fieldset>
             <fieldset>
                 <legend>Informations personnelles</legend>
@@ -126,7 +126,7 @@ include_once("../StructurePage/menu.php");
                 <input name="ville"><br>
                 <label for="telephone">Téléphone</label>
                 <!--Le numéro de téléphone doit correspondre à l'expression régulière donnée-->
-                <input name="telephone" type="tel" placeholder="**********" pattern="0[3, 6, 9, 7, 2][0-9]{8}"><br>
+                <input name="telephone" type="tel" placeholder="0142928100" pattern="0[3, 6, 9, 7, 2][0-9]{8}"><br>
             </fieldset>
             <p><input class="w3-button" name="submit" type="submit" value="Créer le compte"></p>
         </form>
