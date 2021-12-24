@@ -36,7 +36,7 @@ include_once("../FonctionsJS/fonctionsPanier.php");
                     }
                 }
             } else {
-                echo "Pas d'article(s) dans le panier pour l'instant, n'hésitez pas !";
+                echo "Pas d'article(s) dans le panier pour l'instant.";
             }
         }
         ?>
